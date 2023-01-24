@@ -12,7 +12,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
+  - url: https://github.com/gazebosim/{{ repo_name }}/archive/refs/tags/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
     sha256: 07088b9d88fc99c7d704021c6f7e1cd8d19590e0c4c111142118d4208a842aaf
     patches:
       - standalone_bindings.patch
