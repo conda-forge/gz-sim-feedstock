@@ -2,7 +2,7 @@
 {% set repo_name = "gz-" + component_name %}
 {% set version = "7_7.0.0" %}
 {% set version_package = version.split('_')[1] %}
-{% set major_version = version.split(_')[0] %}
+{% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
