@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "7_7.0.0" %}
+{% set version = "7_7.4.0" %}
 {% set version_package = version.split('_')[1] %}
 {% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
@@ -14,13 +14,13 @@ package:
 
 source:
   - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: 07088b9d88fc99c7d704021c6f7e1cd8d19590e0c4c111142118d4208a842aaf
+    sha256: f8707038bc692f5157e3ff6852f83f876f5939697aafd0393747ee171479fd29
     patches:
       - standalone_bindings.patch
       - 1763.patch
 
 build:
-  number: 4
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
@@ -138,7 +138,7 @@ about:
   home: https://github.com/gazebosim/gz-sim
   license: Apache-2.0
   license_file: LICENSE
-  summary: "Open source robotics simulator. The latest version of Gazebo."
+  summary: Open source robotics simulator. The latest version of Gazebo.
 
 extra:
   feedstock-name: {{ repo_name }}
