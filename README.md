@@ -1,11 +1,11 @@
-About gz-sim
-============
+About gz-sim-feedstock
+======================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-sim-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/gazebosim/gz-sim
 
 Package license: Apache-2.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-sim-feedstock/blob/main/LICENSE.txt)
 
 Summary: Open source robotics simulator. The latest version of Gazebo.
 
