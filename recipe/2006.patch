@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8d04ff2326..12da03b1d1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -176,9 +176,7 @@ set(IGN_UTILS_VER ${ignition-utils1_VERSION_MAJOR})
+ 
+ #--------------------------------------
+ # Find protobuf
+-set(REQ_PROTOBUF_VER 3)
+ gz_find_package(GzProtobuf
+-                 VERSION ${REQ_PROTOBUF_VER}
+                  REQUIRED
+                  COMPONENTS all
+                  PRETTY Protobuf)
