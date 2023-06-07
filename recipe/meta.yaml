@@ -20,7 +20,7 @@ source:
       - 1763.patch
 
 build:
-  number: 4
+  number: 5
 
 outputs:
   - name: {{ cxx_name }}
