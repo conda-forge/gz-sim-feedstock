@@ -46,6 +46,7 @@ outputs:
         # Used by tests
         - make  # [unix]
         # We need protoc in build for cross-compiling
+        - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
         - libgz-cmake3
@@ -62,6 +63,7 @@ outputs:
         - libgz-utils2
         - libgz-math7
         - libgz-tools2
+        - libabseil
         - libprotobuf
         - qt-main
         - tinyxml2
