@@ -18,7 +18,7 @@ index 8d04ff2326..12da03b1d1 100644
  #--------------------------------------
  # Find protobuf
 -set(REQ_PROTOBUF_VER 3)
- ign_find_package(IgnProtobuf
+ gz_find_package(GzProtobuf
 -                 VERSION ${REQ_PROTOBUF_VER}
                   REQUIRED
                   COMPONENTS all
