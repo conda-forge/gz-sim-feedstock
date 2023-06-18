@@ -109,6 +109,10 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
+        # Workaround for errors of type
+        # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
+        - libabseil
+        - libprotobuf
         - xorg-libxfixes  # [linux]
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
