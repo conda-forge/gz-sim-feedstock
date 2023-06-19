@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "7_7.0.0" %}
+{% set version = "7_7.5.0" %}
 {% set version_package = version.split('_')[1] %}
 {% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
@@ -14,13 +14,14 @@ package:
 
 source:
   - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: 07088b9d88fc99c7d704021c6f7e1cd8d19590e0c4c111142118d4208a842aaf
+    sha256: b315e7f8952bfd510ff171ae41366961beb9489a5080ccc30cedfe4bb53c6b8d
     patches:
       - standalone_bindings.patch
-      - 1763.patch
+      - 2006.patch
+      - support_protobuf_crosscompilation.patch
 
 build:
-  number: 4
+  number: 5
 
 outputs:
   - name: {{ cxx_name }}
@@ -45,6 +46,7 @@ outputs:
         # Used by tests
         - make  # [unix]
         # We need protoc in build for cross-compiling
+        - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
       host:
         - libgz-cmake3
@@ -61,6 +63,7 @@ outputs:
         - libgz-utils2
         - libgz-math7
         - libgz-tools2
+        - libabseil
         - libprotobuf
         - qt-main
         - tinyxml2
@@ -107,10 +110,12 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
-        # Workaround for "package libgz-sim7-7.0.0-hc835698_0 requires qt-main >=5.15.6,<5.16.0a0, but none of the providers can be installed" error
-        # Please remove after migration to qt=5.15
-        - qt-main=5.15
         - xorg-libxfixes  # [linux]
+        # Workaround for errors of type
+        # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
+        - libabseil
+        - libprotobuf
+        - libgz-sensors7
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python

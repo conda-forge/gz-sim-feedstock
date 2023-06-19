@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5644db73f7..44d5e1de3a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -280,3 +280,9 @@ configure_file(
+ install(
+   FILES ${CMAKE_CURRENT_BINARY_DIR}/include/gz/sim.hh
+   DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz)
++
++if(Protobuf_PROTOC_EXECUTABLE)
++  set_target_properties(protobuf::protoc PROPERTIES
++  IMPORTED_LOCATION_RELEASE "${Protobuf_PROTOC_EXECUTABLE}"
++  )
++endif()
