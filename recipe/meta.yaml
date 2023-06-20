@@ -20,6 +20,7 @@ source:
       - 2006.patch
       - support_protobuf_crosscompilation.patch
       - 1968.patch
+      - physics_relocatable.patch
 
 build:
   number: 6
