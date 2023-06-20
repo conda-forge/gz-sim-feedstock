@@ -1,0 +1,498 @@
+From d8267332a310766e672fe9b14a01a2eb337ff648 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio.traversaro@iit.it>
+Date: Fri, 21 Apr 2023 18:05:20 +0200
+Subject: [PATCH] Add optional binary relocatability
+
+Signed-off-by: Silvio Traversaro <silvio.traversaro@iit.it>
+---
+ include/gz/sim/InstallationDirectories.hh     | 57 ++++++++++++++++
+ include/gz/sim/config.hh.in                   | 12 ++--
+ src/CMakeLists.txt                            | 18 +++++
+ src/InstallationDirectories.cc                | 67 +++++++++++++++++++
+ src/ServerConfig.cc                           |  3 +-
+ src/SystemLoader.cc                           |  5 +-
+ src/Util.cc                                   |  3 +-
+ src/gui/CMakeLists.txt                        |  2 +
+ src/gui/Gui.cc                                |  7 +-
+ src/gui/QuickStartHandler.cc                  |  5 +-
+ src/gui/QuickStartHandler.hh                  |  4 +-
+ src/gui/plugins/CMakeLists.txt                |  4 +-
+ src/gz.cc                                     |  4 +-
+ .../CMakeLists.txt                            |  2 +
+ .../CMakeLists.txt                            |  2 +
+ src/systems/physics/CMakeLists.txt            |  2 +
+ test/integration/CMakeLists.txt               |  2 +
+ test/performance/CMakeLists.txt               |  2 +
+ test/regression/CMakeLists.txt                |  2 +
+ 19 files changed, 186 insertions(+), 17 deletions(-)
+ create mode 100644 include/gz/sim/InstallationDirectories.hh
+ create mode 100644 src/InstallationDirectories.cc
+
+diff --git a/include/gz/sim/InstallationDirectories.hh b/include/gz/sim/InstallationDirectories.hh
+new file mode 100644
+index 0000000000..08e3b2b29e
+--- /dev/null
++++ b/include/gz/sim/InstallationDirectories.hh
+@@ -0,0 +1,57 @@
++/*
++ * Copyright (C) 2023 Open Source Robotics Foundation
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ *
++ */
++
++#ifndef GZ_SIM_INSTALLATION_DIRECTORIES_HH_
++#define GZ_SIM_INSTALLATION_DIRECTORIES_HH_
++
++#include <string>
++
++#include <gz/sim/config.hh>
++#include <gz/sim/Export.hh>
++
++namespace gz
++{
++  namespace sim
++  {
++    inline namespace GZ_SIM_VERSION_NAMESPACE {
++
++    /// \brief getInstallPrefix return the install prefix of the library
++    /// i.e. CMAKE_INSTALL_PREFIX unless the library has been moved
++    GZ_SIM_VISIBLE std::string getInstallPrefix();
++
++    /// \brief getGUIConfigPath return the GUI config path
++    GZ_SIM_VISIBLE std::string getGUIConfigPath();
++
++    /// \brief getSystemConfigPath return the system config path
++    GZ_SIM_VISIBLE std::string getSystemConfigPath();
++
++    /// \brief getServerConfigPath return the server config path
++    GZ_SIM_VISIBLE std::string getServerConfigPath();
++
++    /// \brief getPluginInstallDir return the plugin install dir
++    GZ_SIM_VISIBLE std::string getPluginInstallDir();
++
++    /// \brief getGUIPluginInstallDir return the GUI plugin install dir
++    GZ_SIM_VISIBLE std::string getGUIPluginInstallDir();
++
++    /// \brief getWorldInstallDir return the world install dir
++    GZ_SIM_VISIBLE std::string getWorldInstallDir();
++    }
++  }
++}
++
++#endif
+diff --git a/include/gz/sim/config.hh.in b/include/gz/sim/config.hh.in
+index 894bd0d754..a13b62aa1e 100644
+--- a/include/gz/sim/config.hh.in
++++ b/include/gz/sim/config.hh.in
+@@ -33,12 +33,12 @@
+ 
+ #define GZ_SIM_VERSION_HEADER "Gazebo Sim, version ${PROJECT_VERSION_FULL}\nCopyright (C) 2018 Open Source Robotics Foundation.\nReleased under the Apache 2.0 License.\n\n"
+ 
+-#define GZ_SIM_GUI_CONFIG_PATH "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}/gui"
+-#define GZ_SIM_SYSTEM_CONFIG_PATH "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}/systems"
+-#define GZ_SIM_SERVER_CONFIG_PATH "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}"
+-#define GZ_SIM_PLUGIN_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/gz-${GZ_DESIGNATION}-${PROJECT_VERSION_MAJOR}/plugins"
+-#define GZ_SIM_GUI_PLUGIN_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/gz-${GZ_DESIGNATION}-${PROJECT_VERSION_MAJOR}/plugins/gui"
+-#define GZ_SIM_WORLD_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}/worlds"
++#define GZ_SIM_GUI_CONFIG_PATH _Pragma ("GCC warning \"'GZ_SIM_GUI_CONFIG_PATH' macro is deprecated, use gz::sim::getGUIConfigPath() function instead. \"") "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}/gui"
++#define GZ_SIM_SYSTEM_CONFIG_PATH _Pragma ("GCC warning \"'GZ_SIM_SYSTEM_CONFIG_PATH' macro is deprecated, use gz::sim::getSystemConfigPath() function instead. \"") "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}/systems"
++#define GZ_SIM_SERVER_CONFIG_PATH _Pragma ("GCC warning \"'GZ_SIM_SERVER_CONFIG_PATH' macro is deprecated, use gz::sim::getServerConfigPath() function instead. \"") "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}"
++#define GZ_SIM_PLUGIN_INSTALL_DIR _Pragma ("GCC warning \"'GZ_SIM_PLUGIN_INSTALL_DIR' macro is deprecated, use gz::sim::getPluginInstallDir() function instead. \"") "${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/gz-${GZ_DESIGNATION}-${PROJECT_VERSION_MAJOR}/plugins"
++#define GZ_SIM_GUI_PLUGIN_INSTALL_DIR _Pragma ("GCC warning \"'GZ_SIM_GUI_PLUGIN_INSTALL_DIR' macro is deprecated, use gz::sim::getGUIPluginInstallDir() function instead. \"") "${CMAKE_INSTALL_PREFIX}/${GZ_LIB_INSTALL_DIR}/gz-${GZ_DESIGNATION}-${PROJECT_VERSION_MAJOR}/plugins/gui"
++#define GZ_SIM_WORLD_INSTALL_DIR _Pragma ("GCC warning \"'GZ_SIM_WORLD_INSTALL_DIR' macro is deprecated, use gz::sim::getWorldInstallDir() function instead. \"") "${CMAKE_INSTALL_PREFIX}/${GZ_DATA_INSTALL_DIR}/worlds"
+ #define GZ_DISTRIBUTION "${GZ_DISTRIBUTION}"
+ 
+ #endif
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 7f35532ce1..fe188f1c48 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -54,6 +54,7 @@ set (sources
+   ComponentFactory.cc
+   EntityComponentManager.cc
+   EntityComponentManagerDiff.cc
++  InstallationDirectories.cc
+   Joint.cc
+   LevelManager.cc
+   Light.cc
+@@ -168,6 +169,21 @@ target_link_libraries(${gz_lib_target}
+ 
+ # Create the library target
+ gz_create_core_library(SOURCES ${sources} CXX_STANDARD 17)
++gz_add_get_install_prefix_impl(GET_INSTALL_PREFIX_FUNCTION gz::sim::getInstallPrefix
++                               GET_INSTALL_PREFIX_HEADER gz/sim/InstallationDirectories.hh
++                               OVERRIDE_INSTALL_PREFIX_ENV_VARIABLE GZ_SIM_INSTALL_PREFIX)
++
++set_property(
++  SOURCE InstallationDirectories.cc
++  PROPERTY COMPILE_DEFINITIONS
++  GZ_SIM_GUI_CONFIG_RELATIVE_PATH="${GZ_DATA_INSTALL_DIR}/gui"
++  GZ_SIM_SYSTEM_CONFIG_RELATIVE_PATH="${GZ_DATA_INSTALL_DIR}/systems"
++  GZ_SIM_SERVER_CONFIG_RELATIVE_PATH="${GZ_DATA_INSTALL_DIR}"
++  GZ_SIM_PLUGIN_RELATIVE_INSTALL_DIR="${GZ_LIB_INSTALL_DIR}/gz-${GZ_DESIGNATION}-${PROJECT_VERSION_MAJOR}/plugins"
++  GZ_SIM_GUI_PLUGIN_RELATIVE_INSTALL_DIR="${GZ_LIB_INSTALL_DIR}/gz-${GZ_DESIGNATION}-${PROJECT_VERSION_MAJOR}/plugins/gui"
++  GZ_SIM_WORLD_RELATIVE_INSTALL_DIR="${GZ_DATA_INSTALL_DIR}/worlds"
++)
++
+ target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
+   PUBLIC
+   gz-math${GZ_MATH_VER}
+@@ -213,6 +229,8 @@ gz_build_tests(TYPE UNIT
+     ${PROJECT_LIBRARY_TARGET_NAME}
+     ${EXTRA_TEST_LIB_DEPS}
+     gz-sim${PROJECT_VERSION_MAJOR}
++  ENVIRONMENT
++    GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+ 
+ # Some server unit tests require rendering.
+diff --git a/src/InstallationDirectories.cc b/src/InstallationDirectories.cc
+new file mode 100644
+index 0000000000..2aa64e334d
+--- /dev/null
++++ b/src/InstallationDirectories.cc
+@@ -0,0 +1,67 @@
++/*
++ * Copyright (C) 2023 Open Source Robotics Foundation
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ *
++*/
++
++#include <gz/sim/config.hh>
++#include <gz/sim/InstallationDirectories.hh>
++
++#include <gz/common/Filesystem.hh>
++
++namespace gz
++{
++namespace sim
++{
++inline namespace GZ_SIM_VERSION_NAMESPACE {
++
++std::string getGUIConfigPath()
++{
++  return gz::common::joinPaths(
++      getInstallPrefix(), GZ_SIM_GUI_CONFIG_RELATIVE_PATH);
++}
++
++std::string getSystemConfigPath()
++{
++  return gz::common::joinPaths(
++      getInstallPrefix(), GZ_SIM_SYSTEM_CONFIG_RELATIVE_PATH);
++}
++
++std::string getServerConfigPath()
++{
++  return gz::common::joinPaths(
++      getInstallPrefix(), GZ_SIM_SERVER_CONFIG_RELATIVE_PATH);
++}
++
++std::string getPluginInstallDir()
++{
++  return gz::common::joinPaths(
++      getInstallPrefix(), GZ_SIM_PLUGIN_RELATIVE_INSTALL_DIR);
++}
++
++std::string getGUIPluginInstallDir()
++{
++  return gz::common::joinPaths(
++      getInstallPrefix(), GZ_SIM_GUI_PLUGIN_RELATIVE_INSTALL_DIR);
++}
++
++std::string getWorldInstallDir()
++{
++  return gz::common::joinPaths(
++      getInstallPrefix(), GZ_SIM_WORLD_RELATIVE_INSTALL_DIR);
++}
++
++}
++}
++}
+diff --git a/src/ServerConfig.cc b/src/ServerConfig.cc
+index b7e79b0cde..b64afb2c42 100644
+--- a/src/ServerConfig.cc
++++ b/src/ServerConfig.cc
+@@ -25,6 +25,7 @@
+ #include <gz/fuel_tools/Result.hh>
+ #include <gz/math/Rand.hh>
+ 
++#include "gz/sim/InstallationDirectories.hh"
+ #include "gz/sim/Util.hh"
+ 
+ using namespace gz;
+@@ -1013,7 +1014,7 @@ sim::loadPluginInfo(bool _isPlayback)
+   if (!common::exists(defaultConfig))
+   {
+     auto installedConfig = common::joinPaths(
+-        GZ_SIM_SERVER_CONFIG_PATH,
++        gz::sim::getServerConfigPath(),
+         configFilename);
+ 
+     if (!common::createDirectories(defaultConfigDir))
+diff --git a/src/SystemLoader.cc b/src/SystemLoader.cc
+index 90d86748e2..d68e8d4819 100644
+--- a/src/SystemLoader.cc
++++ b/src/SystemLoader.cc
+@@ -32,6 +32,7 @@
+ 
+ #include <gz/plugin/Loader.hh>
+ 
++#include "gz/sim/InstallationDirectories.hh"
+ #include <gz/sim/config.hh>
+ 
+ using namespace gz::sim;
+@@ -54,12 +55,12 @@ class gz::sim::SystemLoaderPrivate
+     common::env(GZ_HOMEDIR, homePath);
+     systemPaths.AddPluginPaths(common::joinPaths(
+         homePath, ".gz", "sim", "plugins"));
+-    systemPaths.AddPluginPaths(GZ_SIM_PLUGIN_INSTALL_DIR);
++    systemPaths.AddPluginPaths(gz::sim::getPluginInstallDir());
+ 
+     // TODO(CH3): Deprecated. Remove on tock.
+     systemPaths.AddPluginPaths(homePath + "/.ignition/gazebo/plugins");
+ 
+-    systemPaths.AddPluginPaths(GZ_SIM_PLUGIN_INSTALL_DIR);
++    systemPaths.AddPluginPaths(gz::sim::getPluginInstallDir());
+ 
+     return systemPaths.PluginPaths();
+   }
+diff --git a/src/Util.cc b/src/Util.cc
+index bd1087a858..356163a37c 100644
+--- a/src/Util.cc
++++ b/src/Util.cc
+@@ -48,6 +48,7 @@
+ #include "gz/sim/components/World.hh"
+ #include "gz/sim/components/LinearVelocity.hh"
+ 
++#include "gz/sim/InstallationDirectories.hh"
+ #include "gz/sim/Util.hh"
+ 
+ namespace gz
+@@ -820,7 +821,7 @@ std::string resolveSdfWorldFile(const std::string &_sdfFile,
+     systemPaths.SetFilePathEnv(kResourcePathEnv);
+ 
+     // Worlds installed with gz-sim
+-    systemPaths.AddFilePaths(GZ_SIM_WORLD_INSTALL_DIR);
++    systemPaths.AddFilePaths(gz::sim::getWorldInstallDir());
+ 
+     filePath = systemPaths.FindFile(_sdfFile);
+   }
+diff --git a/src/gui/CMakeLists.txt b/src/gui/CMakeLists.txt
+index 0f774b50f2..472eba232d 100644
+--- a/src/gui/CMakeLists.txt
++++ b/src/gui/CMakeLists.txt
+@@ -75,6 +75,8 @@ gz_build_tests(TYPE UNIT
+     gz-sim${PROJECT_VERSION_MAJOR}
+     gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER}
+     gz-transport${GZ_TRANSPORT_VER}::gz-transport${GZ_TRANSPORT_VER}
++  ENVIRONMENT
++    GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+ 
+ if(TARGET UNIT_Gui_clean_exit_TEST)
+diff --git a/src/gui/Gui.cc b/src/gui/Gui.cc
+index f7ff4f0d8f..ef95a468d3 100644
+--- a/src/gui/Gui.cc
++++ b/src/gui/Gui.cc
+@@ -29,6 +29,7 @@
+ #include <gz/gui/MainWindow.hh>
+ #include <gz/gui/Plugin.hh>
+ 
++#include "gz/sim/InstallationDirectories.hh"
+ #include "gz/sim/Util.hh"
+ #include "gz/sim/config.hh"
+ #include "gz/sim/gui/Gui.hh"
+@@ -92,7 +93,7 @@ std::string defaultGuiConfigFile(bool _isPlayback,
+     }
+ 
+     auto installedConfig = common::joinPaths(
+-        GZ_SIM_GUI_CONFIG_PATH, defaultGuiConfigName);
++        gz::sim::getGUIConfigPath(), defaultGuiConfigName);
+     if (!common::copyFile(installedConfig, defaultConfig))
+     {
+       gzerr << "Failed to copy installed config [" << installedConfig
+@@ -275,7 +276,7 @@ std::unique_ptr<gz::gui::Application> createGui(
+   auto app = std::make_unique<gz::gui::Application>(
+     _argc, _argv, gz::gui::WindowType::kMainWindow);
+ 
+-  app->AddPluginPath(GZ_SIM_GUI_PLUGIN_INSTALL_DIR);
++  app->AddPluginPath(gz::sim::getGUIPluginInstallDir());
+ 
+   auto aboutDialogHandler = new gz::sim::gui::AboutDialogHandler();
+   aboutDialogHandler->setParent(app->Engine());
+@@ -287,7 +288,7 @@ std::unique_ptr<gz::gui::Application> createGui(
+   pathManager->setParent(app->Engine());
+ 
+   // add import path so we can load custom modules
+-  app->Engine()->addImportPath(GZ_SIM_GUI_PLUGIN_INSTALL_DIR);
++  app->Engine()->addImportPath(gz::sim::getGUIPluginInstallDir().c_str());
+ 
+   app->SetDefaultConfigPath(defaultConfig);
+ 
+diff --git a/src/gui/QuickStartHandler.cc b/src/gui/QuickStartHandler.cc
+index c420bffc64..8659b2756d 100644
+--- a/src/gui/QuickStartHandler.cc
++++ b/src/gui/QuickStartHandler.cc
+@@ -17,13 +17,16 @@
+ 
+ #include "QuickStartHandler.hh"
+ 
++#include "gz/sim/InstallationDirectories.hh"
++
+ using namespace gz;
+ using namespace sim::gui;
+ 
+ /////////////////////////////////////////////////
+ QString QuickStartHandler::WorldsPath() const
+ {
+-  return QString::fromUtf8(this->worldsPath.c_str());
++  std::string worldsPathLocal = gz::sim::getWorldInstallDir();
++  return QString::fromUtf8(worldsPathLocal.c_str());
+ }
+ 
+ /////////////////////////////////////////////////
+diff --git a/src/gui/QuickStartHandler.hh b/src/gui/QuickStartHandler.hh
+index e4648b5bb8..5814adce08 100644
+--- a/src/gui/QuickStartHandler.hh
++++ b/src/gui/QuickStartHandler.hh
+@@ -68,7 +68,9 @@ class GZ_SIM_GUI_VISIBLE QuickStartHandler : public QObject
+   private: bool showAgain{true};
+ 
+   /// \brief Installed worlds path.
+-  private: std::string worldsPath{GZ_SIM_WORLD_INSTALL_DIR};
++  /// \warning This variable is unused and can be removed
++  ///          once an ABI break is allowed
++  private: std::string worldsPath{""};
+ 
+   /// \brief Get starting world url.
+   private: std::string startingWorld{""};
+diff --git a/src/gui/plugins/CMakeLists.txt b/src/gui/plugins/CMakeLists.txt
+index 956158f39c..2a837a3e0e 100644
+--- a/src/gui/plugins/CMakeLists.txt
++++ b/src/gui/plugins/CMakeLists.txt
+@@ -118,7 +118,9 @@ function(gz_add_gui_plugin plugin_name)
+           # Used to make test-directory headers visible to the unit tests
+           ${PROJECT_SOURCE_DIR}
+           # Used to make test_config.h visible to the unit tests
+-          ${PROJECT_BINARY_DIR})
++          ${PROJECT_BINARY_DIR}
++        ENVIRONMENT
++          GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
+     endif()
+   endif()
+ 
+diff --git a/src/gz.cc b/src/gz.cc
+index aa0f908518..cd71e586bf 100644
+--- a/src/gz.cc
++++ b/src/gz.cc
+@@ -33,6 +33,7 @@
+ #include <sdf/Console.hh>
+ 
+ #include "gz/sim/config.hh"
++#include "gz/sim/InstallationDirectories.hh"
+ #include "gz/sim/Server.hh"
+ #include "gz/sim/ServerConfig.hh"
+ 
+@@ -70,7 +71,8 @@ extern "C" void cmdVerbosity(
+ //////////////////////////////////////////////////
+ extern "C" const char *worldInstallDir()
+ {
+-  return GZ_SIM_WORLD_INSTALL_DIR;
++  static std::string worldInstallDir = gz::sim::getWorldInstallDir();
++  return worldInstallDir.c_str();
+ }
+ 
+ //////////////////////////////////////////////////
+diff --git a/src/systems/environmental_sensor_system/CMakeLists.txt b/src/systems/environmental_sensor_system/CMakeLists.txt
+index c589a464bf..ff91c6e175 100644
+--- a/src/systems/environmental_sensor_system/CMakeLists.txt
++++ b/src/systems/environmental_sensor_system/CMakeLists.txt
+@@ -12,4 +12,6 @@ gz_build_tests(TYPE UNIT
+   TransformTypes_TEST.cc
+   LIB_DEPS
+   gz-math${GZ_MATH_VER}::gz-math${GZ_MATH_VER}
++  ENVIRONMENT
++  GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+diff --git a/src/systems/logical_audio_sensor_plugin/CMakeLists.txt b/src/systems/logical_audio_sensor_plugin/CMakeLists.txt
+index 607c0705d0..9bd43e073e 100644
+--- a/src/systems/logical_audio_sensor_plugin/CMakeLists.txt
++++ b/src/systems/logical_audio_sensor_plugin/CMakeLists.txt
+@@ -18,4 +18,6 @@ gz_build_tests(TYPE UNIT
+     ${gtest_sources}
+   LIB_DEPS
+     ${PROJECT_LIBRARY_TARGET_NAME}-logicalaudiosensorplugin-system
++  ENVIRONMENT
++    GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+diff --git a/src/systems/physics/CMakeLists.txt b/src/systems/physics/CMakeLists.txt
+index ad18e3f494..006fe39fa4 100644
+--- a/src/systems/physics/CMakeLists.txt
++++ b/src/systems/physics/CMakeLists.txt
+@@ -27,4 +27,6 @@ gz_build_tests(TYPE UNIT
+   ${gtest_sources}
+   LIB_DEPS
+   gz-physics${GZ_PHYSICS_VER}::core
++  ENVIRONMENT
++  GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+diff --git a/test/integration/CMakeLists.txt b/test/integration/CMakeLists.txt
+index a59910e399..30d251da3d 100644
+--- a/test/integration/CMakeLists.txt
++++ b/test/integration/CMakeLists.txt
+@@ -147,6 +147,8 @@ gz_build_tests(TYPE INTEGRATION
+     ${tests}
+   LIB_DEPS
+     ${EXTRA_TEST_LIB_DEPS}
++  ENVIRONMENT
++    GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+ 
+ 
+diff --git a/test/performance/CMakeLists.txt b/test/performance/CMakeLists.txt
+index 81cbd25f75..b43c3cba4f 100644
+--- a/test/performance/CMakeLists.txt
++++ b/test/performance/CMakeLists.txt
+@@ -41,6 +41,8 @@ gz_build_tests(TYPE PERFORMANCE
+     ${tests}
+   LIB_DEPS
+     ${EXTRA_TEST_LIB_DEPS}
++  ENVIRONMENT
++    GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+ 
+ add_executable(
+diff --git a/test/regression/CMakeLists.txt b/test/regression/CMakeLists.txt
+index cad4ba516d..126c2b66b4 100644
+--- a/test/regression/CMakeLists.txt
++++ b/test/regression/CMakeLists.txt
+@@ -19,4 +19,6 @@ gz_build_tests(TYPE REGRESSION
+     ${tests}
+   LIB_DEPS
+     ${EXTRA_TEST_LIB_DEPS}
++  ENVIRONMENT
++    GZ_SIM_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+ )
+

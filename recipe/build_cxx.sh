@@ -15,6 +15,7 @@ cd build
 cmake ${CMAKE_ARGS} -GNinja .. \
       -DCMAKE_BUILD_TYPE=Release \
       -DBUILD_TESTING:BOOL=OFF \
+      -DGZ_ENABLE_RELOCATABLE_INSTALL:BOOL=ON \
       -DSKIP_PYBIND11:BOOL=ON
 
 cmake --build . --config Release

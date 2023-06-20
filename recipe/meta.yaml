@@ -19,9 +19,11 @@ source:
       - standalone_bindings.patch
       - 2006.patch
       - support_protobuf_crosscompilation.patch
+      - 1968.patch
+      - physics_relocatable.patch
 
 build:
-  number: 5
+  number: 6
 
 outputs:
   - name: {{ cxx_name }}
