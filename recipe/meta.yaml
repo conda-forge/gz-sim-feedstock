@@ -21,7 +21,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 5
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
@@ -143,7 +143,7 @@ about:
   home: https://github.com/gazebosim/gz-sim
   license: Apache-2.0
   license_file: LICENSE
-  summary: "Open source robotics simulator. The latest version of Gazebo."
+  summary: Open source robotics simulator. The latest version of Gazebo.
 
 extra:
   feedstock-name: {{ repo_name }}
