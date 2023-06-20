@@ -1,8 +1,16 @@
 diff --git a/src/systems/physics/Physics.cc b/src/systems/physics/Physics.cc
-index 8fa201a12a..e7f9493c58 100644
+index 8fa201a12a..2b9f536690 100644
 --- a/src/systems/physics/Physics.cc
 +++ b/src/systems/physics/Physics.cc
-@@ -810,7 +810,7 @@ void Physics::Configure(const Entity &_entity,
+@@ -60,6 +60,7 @@
+ #include <gz/physics/GetContacts.hh>
+ #include <gz/physics/GetBoundingBox.hh>
+ #include <gz/physics/GetEntities.hh>
++#include <gz/physics/InstallationDirectories.hh>
+ #include <gz/physics/Joint.hh>
+ #include <gz/physics/Link.hh>
+ #include <gz/physics/RemoveEntities.hh>
+@@ -810,7 +811,7 @@ void Physics::Configure(const Entity &_entity,
    // * Engines installed with gz-physics
    common::SystemPaths systemPaths;
    systemPaths.SetPluginPathEnv(this->dataPtr->pluginPathEnv);
