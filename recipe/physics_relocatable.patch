@@ -1,0 +1,13 @@
+diff --git a/src/systems/physics/Physics.cc b/src/systems/physics/Physics.cc
+index 8fa201a12a..e7f9493c58 100644
+--- a/src/systems/physics/Physics.cc
++++ b/src/systems/physics/Physics.cc
+@@ -810,7 +810,7 @@ void Physics::Configure(const Entity &_entity,
+   // * Engines installed with gz-physics
+   common::SystemPaths systemPaths;
+   systemPaths.SetPluginPathEnv(this->dataPtr->pluginPathEnv);
+-  systemPaths.AddPluginPaths({GZ_PHYSICS_ENGINE_INSTALL_DIR});
++  systemPaths.AddPluginPaths(gz::physics::getEngineInstallDir());
+ 
+   auto pathToLib = systemPaths.FindSharedLibrary(pluginLib);
+   if (pathToLib.empty())
