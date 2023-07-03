@@ -23,7 +23,7 @@ source:
       - physics_relocatable.patch
 
 build:
-  number: 6
+  number: 7
 
 outputs:
   - name: {{ cxx_name }}
