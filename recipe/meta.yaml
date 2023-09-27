@@ -17,10 +17,7 @@ source:
     sha256: 872c08cb3cefe4b865daa3454256ba16ac993339bcad4a620930fbb51392c5e3
     patches:
       - standalone_bindings.patch
-      - 2006.patch
       - support_protobuf_crosscompilation.patch
-      - 1968.patch
-      - physics_relocatable.patch
 
 build:
   number: 0
