@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "7_7.6.0" %}
+{% set version = "8_8.0.0" %}
 {% set version_package = version.split('_')[1] %}
 {% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
@@ -14,7 +14,7 @@ package:
 
 source:
   - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: 872c08cb3cefe4b865daa3454256ba16ac993339bcad4a620930fbb51392c5e3
+    sha256: c6298a9d03b9a6e5badd1a78a3b178201e9efac2209bbc2fe5a6b6bbba85125c
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
