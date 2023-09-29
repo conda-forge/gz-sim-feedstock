@@ -1,11 +1,21 @@
+From 1f9f3acaa3891caa0e13592095738a3882bd74a5 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Sat, 30 Sep 2023 00:21:33 +0200
+Subject: [PATCH] Support Protobuf cross-compilation
+
+Signed-off-by: Silvio Traversaro <silvio@traversaro.it>
+---
+ CMakeLists.txt | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5644db73f7..44d5e1de3a 100644
+index 8157799113..8d1a33150e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -280,3 +280,9 @@ configure_file(
- install(
-   FILES ${CMAKE_CURRENT_BINARY_DIR}/include/gz/sim.hh
-   DESTINATION ${GZ_INCLUDE_INSTALL_DIR_FULL}/gz)
+@@ -279,3 +279,9 @@ endif()
+ if(TARGET doc)
+   file(COPY ${CMAKE_SOURCE_DIR}/tutorials/files/ DESTINATION ${CMAKE_BINARY_DIR}/doxygen/html/files/)
+ endif()
 +
 +if(Protobuf_PROTOC_EXECUTABLE)
 +  set_target_properties(protobuf::protoc PROPERTIES
