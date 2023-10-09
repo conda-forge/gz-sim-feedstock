@@ -14,9 +14,10 @@ cd build
 
 cmake ${CMAKE_ARGS} -GNinja .. \
       -DCMAKE_BUILD_TYPE=Release \
-      -DBUILD_TESTING:BOOL=OFF \
+      -DBUILD_TESTING:BOOL=ON \
       -DGZ_ENABLE_RELOCATABLE_INSTALL:BOOL=ON \
-      -DSKIP_PYBIND11:BOOL=ON
+      -DSKIP_PYBIND11:BOOL=OFF \
+      -DPython3_EXECUTABLE:PATH=$PYTHON
 
 cmake --build . --config Release
 cmake --build . --config Release --target install
