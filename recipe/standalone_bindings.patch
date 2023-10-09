@@ -31,3 +31,17 @@ index 52a41c1c2e..c58816032e 100644
    endif()
  else()
    # If not a system installation, respect local paths
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8157799113..8f2c59726a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -244,7 +244,7 @@ add_subdirectory(examples)
+ #============================================================================
+ gz_create_packages()
+ 
+-if (pybind11_FOUND)
++if (FALSE)
+ 	add_subdirectory(python)
+ endif()
+ #============================================================================
