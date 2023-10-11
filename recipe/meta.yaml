@@ -71,7 +71,10 @@ outputs:
         - libprotobuf
         - qt-main
         - tinyxml2
-        - python
+        # ensure python_impl gets picked up by smithy (by using it as a selector) and therefore
+        # populated in the .ci_config/*.yaml files, for use in {build,install}-py.{sh,bat}.
+        - python  # [python_impl == "cpython"]
+        - python  # [python_impl == "pypy"]
         - pip
         - pybind11
         - pybind11-abi
