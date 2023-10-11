@@ -9,9 +9,11 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
   export CMAKE_ARGS="${CMAKE_ARGS} -Dgz-msgs10_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin"
 fi
 
+env
+
 # PyPy does not support embedding the interpreter, see 
 # https://github.com/conda-forge/gz-sim-feedstock/pull/26#issuecomment-1755196585
-if [[ $python_impl == "pypy" ]] ; then
+if [[ "${python_impl}" == "pypy" ]] ; then
   export SKIP_PYBIND11=ON
 else
   export SKIP_PYBIND11=OFF
