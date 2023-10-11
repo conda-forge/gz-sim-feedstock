@@ -1,24 +1,25 @@
-From 1f9f3acaa3891caa0e13592095738a3882bd74a5 Mon Sep 17 00:00:00 2001
+From c4df5676d4a07bd1ff27f2cc4f5838903378e844 Mon Sep 17 00:00:00 2001
 From: Silvio Traversaro <silvio@traversaro.it>
-Date: Sat, 30 Sep 2023 00:21:33 +0200
-Subject: [PATCH] Support Protobuf cross-compilation
+Date: Wed, 11 Oct 2023 13:25:21 +0200
+Subject: [PATCH] Support cross-compilation
 
 Signed-off-by: Silvio Traversaro <silvio@traversaro.it>
 ---
- CMakeLists.txt | 6 ++++++
- 1 file changed, 6 insertions(+)
+ src/CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8157799113..8d1a33150e 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -279,3 +279,9 @@ endif()
- if(TARGET doc)
-   file(COPY ${CMAKE_SOURCE_DIR}/tutorials/files/ DESTINATION ${CMAKE_BINARY_DIR}/doxygen/html/files/)
- endif()
-+
-+if(Protobuf_PROTOC_EXECUTABLE)
-+  set_target_properties(protobuf::protoc PROPERTIES
-+  IMPORTED_LOCATION_RELEASE "${Protobuf_PROTOC_EXECUTABLE}"
-+  )
-+endif()
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 6e666dafc9..0aad6089e1 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -10,6 +10,10 @@ get_target_property(msgs_desc_file
+   gz-msgs${GZ_MSGS_VER}::gz-msgs${GZ_MSGS_VER} GZ_MSGS_DESC_FILE)
+ 
+ gz_msgs_generate_messages_impl(
++  PYTHON_INTERPRETER
++    ${gz-msgs10_PYTHON_INTERPRETER}
++  PROTOC_EXEC
++    ${gz-msgs10_PROTOC_EXECUTABLE}
+   MSGS_GEN_SCRIPT
+     ${gz-msgs10_PROTO_GENERATOR_SCRIPT}
+   FACTORY_GEN_SCRIPT
