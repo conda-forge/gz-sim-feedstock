@@ -27,38 +27,171 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64</td>
+              <td>linux_64_python3.10.____cpythonpython_implcpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.10.____cpythonpython_implcpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64</td>
+              <td>linux_64_python3.11.____cpythonpython_implcpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.11.____cpythonpython_implcpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64</td>
+              <td>linux_64_python3.8.____cpythonpython_implcpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.8.____cpythonpython_implcpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64</td>
+              <td>linux_64_python3.9.____73_pypypython_implpypy</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____73_pypypython_implpypy" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64</td>
+              <td>linux_64_python3.9.____cpythonpython_implcpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.10.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.10.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.11.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.11.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.8.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.8.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.9.____73_pypypython_implpypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.9.____73_pypypython_implpypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_python3.9.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.9.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.10.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.10.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.11.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.11.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.8.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.8.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.9.____73_pypypython_implpypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.9.____73_pypypython_implpypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.9.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.9.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_python3.10.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.10.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_python3.11.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.11.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_python3.8.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.8.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_python3.9.____cpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.9.____cpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.10.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.10.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.11.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.11.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.8.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.8.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.9.____73_pypypython_implpypy</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.9.____73_pypypython_implpypy" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_python3.9.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.9.____cpythonpython_implcpython" alt="variant">
                 </a>
               </td>
             </tr>
@@ -74,9 +207,9 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim7-green.svg)](https://anaconda.org/conda-forge/gz-sim7) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim7.svg)](https://anaconda.org/conda-forge/gz-sim7) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim7.svg)](https://anaconda.org/conda-forge/gz-sim7) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim7.svg)](https://anaconda.org/conda-forge/gz-sim7) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim7--python-green.svg)](https://anaconda.org/conda-forge/gz-sim7-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim7-python.svg)](https://anaconda.org/conda-forge/gz-sim7-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim7-python.svg)](https://anaconda.org/conda-forge/gz-sim7-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim7-python.svg)](https://anaconda.org/conda-forge/gz-sim7-python) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--sim7-green.svg)](https://anaconda.org/conda-forge/libgz-sim7) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-sim7.svg)](https://anaconda.org/conda-forge/libgz-sim7) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-sim7.svg)](https://anaconda.org/conda-forge/libgz-sim7) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-sim7.svg)](https://anaconda.org/conda-forge/libgz-sim7) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim8-green.svg)](https://anaconda.org/conda-forge/gz-sim8) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim8.svg)](https://anaconda.org/conda-forge/gz-sim8) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim8.svg)](https://anaconda.org/conda-forge/gz-sim8) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim8.svg)](https://anaconda.org/conda-forge/gz-sim8) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim8--python-green.svg)](https://anaconda.org/conda-forge/gz-sim8-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim8-python.svg)](https://anaconda.org/conda-forge/gz-sim8-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim8-python.svg)](https://anaconda.org/conda-forge/gz-sim8-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim8-python.svg)](https://anaconda.org/conda-forge/gz-sim8-python) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--sim8-green.svg)](https://anaconda.org/conda-forge/libgz-sim8) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-sim8.svg)](https://anaconda.org/conda-forge/libgz-sim8) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-sim8.svg)](https://anaconda.org/conda-forge/libgz-sim8) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-sim8.svg)](https://anaconda.org/conda-forge/libgz-sim8) |
 
 Installing gz-sim
 =================
@@ -88,41 +221,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gz-sim7, gz-sim7-python, libgz-sim7` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gz-sim8, gz-sim8-python, libgz-sim8` can be installed with `conda`:
 
 ```
-conda install gz-sim7 gz-sim7-python libgz-sim7
-```
-
-or with `mamba`:
-
-```
-mamba install gz-sim7 gz-sim7-python libgz-sim7
-```
-
-It is possible to list all of the versions of `gz-sim7` available on your platform with `conda`:
-
-```
-conda search gz-sim7 --channel conda-forge
+conda install gz-sim8 gz-sim8-python libgz-sim8
 ```
 
 or with `mamba`:
 
 ```
-mamba search gz-sim7 --channel conda-forge
+mamba install gz-sim8 gz-sim8-python libgz-sim8
+```
+
+It is possible to list all of the versions of `gz-sim8` available on your platform with `conda`:
+
+```
+conda search gz-sim8 --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search gz-sim8 --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search gz-sim7 --channel conda-forge
+mamba repoquery search gz-sim8 --channel conda-forge
 
-# List packages depending on `gz-sim7`:
-mamba repoquery whoneeds gz-sim7 --channel conda-forge
+# List packages depending on `gz-sim8`:
+mamba repoquery whoneeds gz-sim8 --channel conda-forge
 
-# List dependencies of `gz-sim7`:
-mamba repoquery depends gz-sim7 --channel conda-forge
+# List dependencies of `gz-sim8`:
+mamba repoquery depends gz-sim8 --channel conda-forge
 ```
 
 

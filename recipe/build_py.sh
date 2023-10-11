@@ -17,7 +17,12 @@ cmake ${CMAKE_ARGS} -GNinja .. \
     -DUSE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION:BOOL=ON \
     -DPython3_EXECUTABLE:PATH=$PYTHON \
     -DPYTHON_EXECUTABLE:PATH=$PYTHON \
+    -DBUILD_TESTING:BOOL=OFF \
     -DPython3_INCLUDE_DIR:PATH=$PREFIX/include/`ls $PREFIX/include | grep "python\|pypy"`
 
 cmake --build . --config Release
 cmake --build . --config Release --target install
+
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
+  ctest --output-on-failure -C Release
+fi

@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "7_7.6.0" %}
+{% set version = "8_8.0.0" %}
 {% set version_package = version.split('_')[1] %}
 {% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
@@ -14,7 +14,7 @@ package:
 
 source:
   - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: 872c08cb3cefe4b865daa3454256ba16ac993339bcad4a620930fbb51392c5e3
+    sha256: c6298a9d03b9a6e5badd1a78a3b178201e9efac2209bbc2fe5a6b6bbba85125c
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
@@ -36,6 +36,10 @@ outputs:
         - cmake
         - pkg-config
         - ninja
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - pybind11                               # [build_platform != target_platform]
+        - pybind11-abi                           # [build_platform != target_platform]
         - {{ cdt('mesa-libgl-devel') }}  # [linux]
         - {{ cdt('mesa-dri-drivers') }}  # [linux]
         - {{ cdt('libselinux') }}  # [linux]
@@ -44,21 +48,22 @@ outputs:
         - {{ cdt('libxext') }}     # [linux]
         # Used by tests
         - make  # [unix]
-        # We need protoc in build for cross-compiling
+        # We need protoc and gz-msg10 in build for cross-compiling
         - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
+        - libgz-msgs10  # [build_platform != target_platform]
       host:
         - libgz-cmake3
-        - libsdformat13
+        - libsdformat14
         - libgz-plugin2
-        - libgz-transport12
-        - libgz-msgs9
+        - libgz-transport13
+        - libgz-msgs10
         - libgz-common5
-        - libgz-fuel-tools8
-        - libgz-gui7
-        - libgz-physics6
-        - libgz-sensors7
-        - libgz-rendering7
+        - libgz-fuel-tools9
+        - libgz-gui8
+        - libgz-physics7
+        - libgz-sensors8
+        - libgz-rendering8
         - libgz-utils2
         - libgz-math7
         - libgz-tools2
@@ -66,8 +71,14 @@ outputs:
         - libprotobuf
         - qt-main
         - tinyxml2
+        # ensure python_impl gets picked up by smithy (by using it as a selector) and therefore
+        # populated in the .ci_config/*.yaml files, for use in {build,install}-py.{sh,bat}.
+        - python  # [python_impl == "cpython"]
+        - python  # [python_impl == "pypy"]
+        - pip
+        - pybind11
+        - pybind11-abi
         - xorg-libxfixes  # [linux]
-
     test:
       commands:
         - test -f ${PREFIX}/include/gz/{{ component_version }}/gz/{{ component_name }}.hh  # [not win]
@@ -115,6 +126,7 @@ outputs:
         - libabseil
         - libprotobuf
         - libgz-sensors7
+        - libgz-physics7
         - qt-main
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
