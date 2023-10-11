@@ -18,9 +18,14 @@ pybind11_abi:
 - '4'
 python:
 - 3.8.* *_cpython
+python_impl:
+- cpython
 qt_main:
 - '5.15'
 target_platform:
 - win-64
 tinyxml2:
 - '9'
+zip_keys:
+- - python
+  - python_impl

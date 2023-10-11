@@ -29,7 +29,9 @@ pin_run_as_build:
 pybind11_abi:
 - '4'
 python:
-- 3.9.* *_73_pypy
+- 3.9.* *_cpython
+python_impl:
+- cpython
 qt_main:
 - '5.15'
 target_platform:
@@ -39,3 +41,5 @@ tinyxml2:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - python
+  - python_impl
