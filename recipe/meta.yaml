@@ -114,6 +114,7 @@ outputs:
         # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
         - libabseil
         - libprotobuf
+        - libgz-physics6
         - libgz-sensors7
         - qt-main
       run:
