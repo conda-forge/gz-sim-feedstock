@@ -115,6 +115,7 @@ outputs:
         - libabseil
         - libprotobuf
         - libgz-sensors7
+        - libgz-physics6
         - qt-main
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
