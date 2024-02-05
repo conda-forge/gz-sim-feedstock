@@ -9,7 +9,7 @@ cxx_compiler:
 libabseil:
 - '20230802'
 libprotobuf:
-- 4.24.4
+- 4.25.1
 pin_run_as_build:
   python:
     min_pin: x.x
