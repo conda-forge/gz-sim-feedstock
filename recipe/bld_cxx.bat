@@ -2,11 +2,7 @@ rmdir /s /q build
 mkdir build
 cd build
 
-if "%python_impl%" == "pypy" (
-  set SKIP_PYBIND11=True
-) else (
-  set SKIP_PYBIND11=False
-)
+set SKIP_PYBIND11=True
 
 cmake ^
     -G "Ninja" ^
