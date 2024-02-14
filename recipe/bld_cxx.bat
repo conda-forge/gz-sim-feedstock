@@ -2,7 +2,16 @@ rmdir /s /q build
 mkdir build
 cd build
 
-set SKIP_PYBIND11=True
+:: We only pass SKIP_PYBIND11 on pypy as for regular Python builds, we want to
+:: set SKIP_PYBIND11 to False, as pybind11 is used to compile the gz::sim::systems::PythonSystemLoader 
+:: (see " Gazebo Systems written in Python" in https://gazebosim.org/api/sim/8/python_interfaces.html)
+:: Python bindings itself are compiled instead in bld_py.bat, so the compilation for those is disabled
+:: by the standalone_bindings.patch patch
+if "%python_impl%" == "pypy" (
+  set SKIP_PYBIND11=True
+) else (
+  set SKIP_PYBIND11=False
+)
 
 cmake ^
     -G "Ninja" ^
