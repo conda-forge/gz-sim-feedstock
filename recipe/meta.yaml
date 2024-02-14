@@ -82,12 +82,14 @@ outputs:
     test:
       commands:
         - test -f ${PREFIX}/include/gz/{{ component_version }}/gz/{{ component_name }}.hh  # [not win]
-        - test -f ${PREFIX}/lib/lib{{ name }}.so  # [linux]
-        - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
+        - test -f ${PREFIX}/lib/lib{{ name }}.${SHLIB_EXT}  # [unix]
+        - test -f ${PREFIX}/lib/lib{{ name }}-python-system-loader-system.${SHLIB_EXT}  # [unix and python_impl != "pypy"]
         - test -f ${PREFIX}/lib/cmake/{{ name }}/{{ name }}-config.cmake  # [not win]
         - if not exist %PREFIX%\\Library\\include\\gz\\{{ component_version }}\\gz\\{{ component_name }}.hh exit 1  # [win]
         - if not exist %PREFIX%\\Library\\lib\\{{ name }}.lib exit 1  # [win]
         - if not exist %PREFIX%\\Library\\bin\\{{ name }}.dll exit 1  # [win]
+        - if not exist %PREFIX%\\Library\\lib\\{{ name }}-python-system-loader-system.lib exit 1  # [win and python_impl != "pypy"]
+        - if not exist %PREFIX%\\Library\\bin\\{{ name }}-python-system-loader-system.dll exit 1  # [win and python_impl != "pypy"]
         - if not exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
 
   - name: {{ python_name }}
