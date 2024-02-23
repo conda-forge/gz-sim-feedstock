@@ -21,26 +21,15 @@ index 52a41c1c2e..c58816032e 100644
  if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
    # pybind11 logic for setting up a debug build when both a debug and release
    # python interpreter are present in the system seems to be pretty much broken.
-@@ -22,6 +37,9 @@ if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
- 
-   if(USE_DIST_PACKAGES_FOR_PYTHON)
-     string(REPLACE "site-packages" "dist-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITEARCH})
-+  else()
-+    # custom cmake command is returning dist-packages
-+    string(REPLACE "dist-packages" "site-packages" GZ_PYTHON_INSTALL_PATH ${Python3_SITEARCH})
-   endif()
- else()
-   # If not a system installation, respect local paths
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8157799113..8f2c59726a 100644
+index 21080bd6d9..9074e3a319 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -244,7 +244,7 @@ add_subdirectory(examples)
  #============================================================================
  gz_create_packages()
  
--if (pybind11_FOUND)
+-if (pybind11_FOUND AND NOT SKIP_PYBIND11)
 +if (FALSE)
  	add_subdirectory(python)
  endif()
