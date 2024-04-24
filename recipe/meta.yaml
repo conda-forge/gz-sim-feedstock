@@ -18,6 +18,7 @@ source:
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
+      - 2382.patch
 
 build:
   number: 0
