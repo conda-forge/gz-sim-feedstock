@@ -123,13 +123,6 @@ outputs:
         - pybind11-abi
         - pytest
         - xorg-libxfixes  # [linux]
-        # Workaround for errors of type
-        # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
-        - libabseil
-        - libprotobuf
-        - libgz-sensors7
-        - libgz-physics7
-        - qt-main
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
