@@ -14,7 +14,7 @@ package:
 
 source:
   - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: e59a6c983c3e44c7452315394012df1c96eeb18be60b0ee3a6db5d2e9b9409c0
+    sha256: d709eafd7c919add5fc828e10f6605abaa2aceb6b9609f44e115f204853cf5db
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
