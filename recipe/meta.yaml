@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "8_8.3.0" %}
+{% set version = "8_8.6.0" %}
 {% set version_package = version.split('_')[1] %}
 {% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
@@ -18,10 +18,9 @@ source:
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
-      - 2382.patch
 
 build:
-  number: 1
+  number: 0
   # gz-sim requires gz-common's geospatial component, that requires
   # gdal that is not available on ppc64le https://github.com/conda-forge/gdal-feedstock/issues/918
   skip: true  # [ppc64le]
@@ -36,6 +35,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib('c') }}
         - {{ compiler('cxx') }}
         - cmake
         - pkg-config
@@ -79,7 +79,6 @@ outputs:
         # populated in the .ci_config/*.yaml files, for use in {build,install}-py.{sh,bat}.
         - python  # [python_impl == "cpython"]
         - python  # [python_impl == "pypy"]
-        - pip
         - pybind11
         - pybind11-abi
         - xorg-libxfixes  # [linux]
@@ -102,6 +101,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib('c') }}
         - {{ compiler('cxx') }}
         - swig
         - ninja
@@ -122,7 +122,6 @@ outputs:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - libgz-common5
         - python
-        - pip
         - pybind11
         - pybind11-abi
         - pytest
