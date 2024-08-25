@@ -63,7 +63,7 @@ outputs:
         - libgz-gui8
         - libgz-physics7
         - libgz-sensors8
-        - libgz-rendering8
+        - libgz-rendering8 >=8.2.0
         - libgz-utils2
         - libgz-math7
         - libgz-tools2
