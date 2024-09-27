@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "8_8.3.0" %}
+{% set version = "9_9.0.0" %}
 {% set version_package = version.split('_')[1] %}
 {% set major_version = version.split('_')[0] %}
 {% set name = repo_name + major_version %}
@@ -14,14 +14,14 @@ package:
 
 source:
   - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: e59a6c983c3e44c7452315394012df1c96eeb18be60b0ee3a6db5d2e9b9409c0
+    sha256: de9815b4b2a19c2c3e30b29a7b312c4949713a317021d4e416c521ceb525c358
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
       - 2382.patch
 
 build:
-  number: 1
+  number: 0
   # gz-sim requires gz-common's geospatial component, that requires
   # gdal that is not available on ppc64le https://github.com/conda-forge/gdal-feedstock/issues/918
   skip: true  # [ppc64le]
@@ -36,6 +36,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake
         - pkg-config
@@ -102,6 +103,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - swig
         - ninja
