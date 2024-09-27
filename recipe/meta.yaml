@@ -61,7 +61,7 @@ outputs:
         - libgz-common5
         - libgz-fuel-tools9
         - libgz-gui8
-        - libgz-physics7
+        - libgz-physics7 >=7.3.0
         - libgz-sensors8
         - libgz-rendering8 >=8.2.0
         - libgz-utils2
