@@ -121,6 +121,9 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
+        # Workaround for wrong pinning
+        - libabseil
+        - libprotobuf
         - xorg-libxfixes  # [linux]
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
