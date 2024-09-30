@@ -1,8 +1,7 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "9_9.0.0" %}
-{% set version_package = version.split('_')[1] %}
-{% set major_version = version.split('_')[0] %}
+{% set version = "9.0.0" %}
+{% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
@@ -10,10 +9,10 @@
 
 package:
   name: {{ name }}
-  version: {{ version_package }}
+  version: {{ version }}
 
 source:
-  - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
+  - url: https://github.com/gazebosim/{{ repo_name }}/archive/refs/tags/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
     sha256: de9815b4b2a19c2c3e30b29a7b312c4949713a317021d4e416c521ceb525c358
     patches:
       - standalone_bindings.patch
@@ -22,9 +21,6 @@ source:
 
 build:
   number: 0
-  # gz-sim requires gz-common's geospatial component, that requires
-  # gdal that is not available on ppc64le https://github.com/conda-forge/gdal-feedstock/issues/918
-  skip: true  # [ppc64le]
 
 outputs:
   - name: {{ cxx_name }}
@@ -36,7 +32,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
-        - {{ stdlib("c") }}
+        - {{ stdlib('c') }}
         - {{ compiler('cxx') }}
         - cmake
         - pkg-config
@@ -53,24 +49,24 @@ outputs:
         - {{ cdt('libxext') }}     # [linux]
         # Used by tests
         - make  # [unix]
-        # We need protoc and gz-msg10 in build for cross-compiling
+        # We need protoc and gz-msg11 in build for cross-compiling
         - libabseil  # [build_platform != target_platform]
         - libprotobuf  # [build_platform != target_platform]
-        - libgz-msgs10  # [build_platform != target_platform]
+        - libgz-msgs11  # [build_platform != target_platform]
       host:
-        - libgz-cmake3
-        - libsdformat14
-        - libgz-plugin2
-        - libgz-transport13
-        - libgz-msgs10
-        - libgz-common5
-        - libgz-fuel-tools9
-        - libgz-gui8
-        - libgz-physics7
-        - libgz-sensors8
-        - libgz-rendering8
-        - libgz-utils2
-        - libgz-math7
+        - libgz-cmake4
+        - libsdformat15
+        - libgz-plugin3
+        - libgz-transport14
+        - libgz-msgs11
+        - libgz-common6
+        - libgz-fuel-tools10
+        - libgz-gui9
+        - libgz-physics8
+        - libgz-sensors9
+        - libgz-rendering9
+        - libgz-utils3
+        - libgz-math8
         - libgz-tools2
         - libabseil
         - libprotobuf
@@ -103,7 +99,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
-        - {{ stdlib("c") }}
+        - {{ stdlib('c') }}
         - {{ compiler('cxx') }}
         - swig
         - ninja
@@ -122,7 +118,7 @@ outputs:
         - {{ cdt('libxext') }}     # [linux]
       host:
         - {{ pin_subpackage(cxx_name, exact=True) }}
-        - libgz-common5
+        - libgz-common6
         - python
         - pip
         - pybind11
