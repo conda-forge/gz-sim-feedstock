@@ -118,6 +118,7 @@ outputs:
       host:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - libgz-common6
+        - libgz-msgs11
         - python
         - pip
         - pybind11
