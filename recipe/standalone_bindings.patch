@@ -1,12 +1,12 @@
 diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
-index 52a41c1c2e..c58816032e 100644
+index 98bbe66650..06295abf3b 100644
 --- a/python/CMakeLists.txt
 +++ b/python/CMakeLists.txt
 @@ -1,3 +1,18 @@
 +if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 +  cmake_minimum_required(VERSION 3.16)
-+  set(GZ_SIM_VER 8)
-+  set(GZ_COMMON_VER 5)
++  set(GZ_SIM_VER 9)
++  set(GZ_COMMON_VER 6)
 +  project(gz-sim${GZ_SIM_VER}-python VERSION ${GZ_SIM_VER})
 +  find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 +  find_package(pybind11 REQUIRED)
@@ -18,14 +18,14 @@ index 52a41c1c2e..c58816032e 100644
 +  endif()
 +endif()
 +
- if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-   # pybind11 logic for setting up a debug build when both a debug and release
-   # python interpreter are present in the system seems to be pretty much broken.
+ if(USE_SYSTEM_PATHS_FOR_PYTHON_INSTALLATION)
+   if(NOT Python3_SITEARCH)
+     # Get variable from Python3 module
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 21080bd6d9..9074e3a319 100644
+index 9f309499c8..f3a82dcac0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -244,7 +244,7 @@ add_subdirectory(examples)
+@@ -250,7 +250,7 @@ add_subdirectory(examples)
  #============================================================================
  gz_create_packages()
  
