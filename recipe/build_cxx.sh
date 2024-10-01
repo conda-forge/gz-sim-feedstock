@@ -6,7 +6,7 @@ if [[ "${target_platform}" == osx-* ]]; then
 fi
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
-  export CMAKE_ARGS="${CMAKE_ARGS} -Dgz-msgs10_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs10_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs10_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs10_protoc_plugin"
+  export CMAKE_ARGS="${CMAKE_ARGS} -Dgz-msgs11_PYTHON_INTERPRETER=$BUILD_PREFIX/bin/python -Dgz-msgs11_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -Dgz-msgs11_PROTO_GENERATOR_PLUGIN=$BUILD_PREFIX/bin/gz-msgs11_protoc_plugin"
 fi
 
 # We only pass SKIP_PYBIND11 on pypy as for regular Python builds, we want to
