@@ -79,6 +79,7 @@ outputs:
         - pybind11
         - pybind11-abi
         - xorg-libxfixes  # [linux]
+        - dlfcn-win32  # [win]
     test:
       commands:
         - test -f ${PREFIX}/include/gz/{{ component_version }}/gz/{{ component_name }}.hh  # [not win]
@@ -125,6 +126,9 @@ outputs:
         - pybind11-abi
         - pytest
         - xorg-libxfixes  # [linux]
+        # Workaround for wrong pinnings
+        - libabseil
+        - libprotobuf
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
