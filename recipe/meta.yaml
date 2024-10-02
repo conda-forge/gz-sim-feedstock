@@ -1,8 +1,7 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "8_8.3.0" %}
-{% set version_package = version.split('_')[1] %}
-{% set major_version = version.split('_')[0] %}
+{% set version = "8.6.0" %}
+{% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
@@ -10,21 +9,17 @@
 
 package:
   name: {{ name }}
-  version: {{ version_package }}
+  version: {{ version }}
 
 source:
-  - url: https://github.com/gazebosim/gz-sim/archive/refs/tags/gz-sim{{ version }}.tar.gz
-    sha256: e59a6c983c3e44c7452315394012df1c96eeb18be60b0ee3a6db5d2e9b9409c0
+  - url: https://github.com/gazebosim/{{ repo_name }}/archive/refs/tags/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
+    sha256: d709eafd7c919add5fc828e10f6605abaa2aceb6b9609f44e115f204853cf5db
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
-      - 2382.patch
 
 build:
-  number: 1
-  # gz-sim requires gz-common's geospatial component, that requires
-  # gdal that is not available on ppc64le https://github.com/conda-forge/gdal-feedstock/issues/918
-  skip: true  # [ppc64le]
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
@@ -36,6 +31,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib('c') }}
         - {{ compiler('cxx') }}
         - cmake
         - pkg-config
@@ -65,9 +61,9 @@ outputs:
         - libgz-common5
         - libgz-fuel-tools9
         - libgz-gui8
-        - libgz-physics7
+        - libgz-physics7 >=7.3.0
         - libgz-sensors8
-        - libgz-rendering8
+        - libgz-rendering8 >=8.2.0
         - libgz-utils2
         - libgz-math7
         - libgz-tools2
@@ -79,7 +75,6 @@ outputs:
         # populated in the .ci_config/*.yaml files, for use in {build,install}-py.{sh,bat}.
         - python  # [python_impl == "cpython"]
         - python  # [python_impl == "pypy"]
-        - pip
         - pybind11
         - pybind11-abi
         - xorg-libxfixes  # [linux]
@@ -102,6 +97,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib('c') }}
         - {{ compiler('cxx') }}
         - swig
         - ninja
@@ -122,10 +118,12 @@ outputs:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - libgz-common5
         - python
-        - pip
         - pybind11
         - pybind11-abi
         - pytest
+        # Workaround for wrong pinning
+        - libabseil
+        - libprotobuf
         - xorg-libxfixes  # [linux]
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
