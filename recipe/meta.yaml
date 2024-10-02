@@ -19,7 +19,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ cxx_name }}
@@ -40,12 +40,6 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - pybind11                               # [build_platform != target_platform]
         - pybind11-abi                           # [build_platform != target_platform]
-        - {{ cdt('mesa-libgl-devel') }}  # [linux]
-        - {{ cdt('mesa-dri-drivers') }}  # [linux]
-        - {{ cdt('libselinux') }}  # [linux]
-        - {{ cdt('libxdamage') }}  # [linux]
-        - {{ cdt('libxxf86vm') }}  # [linux]
-        - {{ cdt('libxext') }}     # [linux]
         # Used by tests
         - make  # [unix]
         # We need protoc and gz-msg11 in build for cross-compiling
@@ -71,11 +65,11 @@ outputs:
         - libprotobuf
         - qt-main
         - tinyxml2
+        - libgl-devel  # [linux]
         # ensure python_impl gets picked up by smithy (by using it as a selector) and therefore
         # populated in the .ci_config/*.yaml files, for use in {build,install}-py.{sh,bat}.
         - python  # [python_impl == "cpython"]
         - python  # [python_impl == "pypy"]
-        - pip
         - pybind11
         - pybind11-abi
         - xorg-libxfixes  # [linux]
@@ -121,7 +115,6 @@ outputs:
         - libgz-common6
         - libgz-msgs11
         - python
-        - pip
         - pybind11
         - pybind11-abi
         - pytest
