@@ -40,7 +40,6 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - pybind11                               # [build_platform != target_platform]
         - pybind11-abi                           # [build_platform != target_platform]
-        - libgl-devel
         # Used by tests
         - make  # [unix]
         # We need protoc and gz-msg11 in build for cross-compiling
@@ -66,6 +65,7 @@ outputs:
         - libprotobuf
         - qt-main
         - tinyxml2
+        - libgl-devel  # [linux]
         # ensure python_impl gets picked up by smithy (by using it as a selector) and therefore
         # populated in the .ci_config/*.yaml files, for use in {build,install}-py.{sh,bat}.
         - python  # [python_impl == "cpython"]
