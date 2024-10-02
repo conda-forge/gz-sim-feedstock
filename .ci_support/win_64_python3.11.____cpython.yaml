@@ -1,5 +1,7 @@
 c_compiler:
 - vs2019
+c_stdlib:
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -7,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2019
 libabseil:
-- '20240116'
+- '20240722'
 libprotobuf:
-- 4.25.3
+- 5.27.5
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -17,12 +19,7 @@ pin_run_as_build:
 pybind11_abi:
 - '4'
 python:
-- 3.10.* *_cpython
 - 3.11.* *_cpython
-- 3.12.* *_cpython
-- 3.8.* *_cpython
-- 3.9.* *_73_pypy
-- 3.9.* *_cpython
 qt_main:
 - '5.15'
 target_platform:
