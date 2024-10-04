@@ -108,6 +108,7 @@ outputs:
         - libgz-common5
         - python
         - pip
+        - setuptools
         - pybind11
         - pybind11-abi
         - pytest
