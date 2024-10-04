@@ -54,7 +54,7 @@ outputs:
         - libgz-plugin2
         - libgz-transport12
         - libgz-msgs9
-        - libgz-common5 5.6.0 *_7
+        - libgz-common5
         - libgz-fuel-tools8
         - libgz-gui7
         - libgz-physics6
