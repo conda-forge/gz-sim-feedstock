@@ -29,13 +29,13 @@ pin_run_as_build:
 pybind11_abi:
 - '4'
 python:
-- 3.12.* *_cpython
+- 3.13.* *_cp313
 python_impl:
 - cpython
 qt_main:
 - '5.15'
 target_platform:
-- linux-ppc64le
+- linux-64
 tinyxml2:
 - '10'
 zip_keys:
