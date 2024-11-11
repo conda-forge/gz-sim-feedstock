@@ -64,6 +64,7 @@ outputs:
         - libabseil
         - libprotobuf
         - qt-main
+        - libpq
         - tinyxml2
         - libgl-devel  # [linux]
         # ensure python_impl gets picked up by smithy (by using it as a selector) and therefore
