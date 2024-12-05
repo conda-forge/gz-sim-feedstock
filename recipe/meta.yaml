@@ -118,7 +118,7 @@ outputs:
         - libabseil
         - libprotobuf
         # Workaround for libflang problem https://github.com/conda-forge/gz-sim-feedstock/pull/81#issuecomment-2519669002
-        - libflang 5.*
+        - libflang 5.*  # [win]
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
