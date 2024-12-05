@@ -72,7 +72,7 @@ outputs:
         - pybind11
         - pybind11-abi
         - xorg-libxfixes  # [linux]
-        - libgl-devel
+        - libgl-devel  # [linux]
     test:
       commands:
         - test -f ${PREFIX}/include/gz/{{ component_version }}/gz/{{ component_name }}.hh  # [not win]
@@ -116,7 +116,7 @@ outputs:
         - xorg-libxfixes  # [linux]
         - libgl-devel  # [linux]
         # Workaround for libflang problem https://github.com/conda-forge/gz-sim-feedstock/pull/81#issuecomment-2519669002
-        - libflang 5.*
+        - libflang 5.*  # [win]
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
