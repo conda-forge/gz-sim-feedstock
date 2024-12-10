@@ -33,6 +33,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ stdlib("c") }}
+        - sysroot_linux-64 2.17  # [ppc64le]
         - {{ compiler('cxx') }}
         - cmake
         - pkg-config
