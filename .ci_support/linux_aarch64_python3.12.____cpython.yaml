@@ -30,6 +30,8 @@ pybind11_abi:
 - '4'
 python:
 - 3.12.* *_cpython
+qt6_main:
+- '6.7'
 qt_main:
 - '5.15'
 target_platform:
