@@ -65,7 +65,7 @@ outputs:
         - libgz-tools2
         - libabseil
         - libprotobuf
-        - qt6-main
+        - qt-main
         - tinyxml2
         - xorg-libxfixes  # [linux]
 
