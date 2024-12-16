@@ -9,6 +9,12 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
   export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"
 fi
 
+echo "QEMU_LD_PREFIX: ${QEMU_LD_PREFIX}"
+ls ${QEMU_LD_PREFIX}/../../
+ls ${QEMU_LD_PREFIX}
+
+conda list -p /opt/conda/envs/sysroot_linux-ppc64le/
+
 mkdir build
 cd build
 
