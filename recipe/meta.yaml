@@ -19,7 +19,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 7
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
