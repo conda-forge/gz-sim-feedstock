@@ -1,6 +1,6 @@
 {% set component_name = "sim" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "8.6.0" %}
+{% set version = "8.9.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -19,7 +19,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 6
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
