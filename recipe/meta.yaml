@@ -13,9 +13,8 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/refs/tags/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: d709eafd7c919add5fc828e10f6605abaa2aceb6b9609f44e115f204853cf5db
+    sha256: 2737f4eb4a58c3c48cc32893109d2702ec5b2dd5313472f45f55923789bdaf50
     patches:
-      - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
 
 build:
