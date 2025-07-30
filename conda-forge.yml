@@ -1,5 +1,4 @@
 bot:
-  # See https://github.com/gazebosim/docs/blob/master/tools/versions.md
   abi_migration_branches:
   - v8
   automerge: true
