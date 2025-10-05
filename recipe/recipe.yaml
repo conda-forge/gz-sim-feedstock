@@ -1,0 +1,179 @@
+schema_version: 1
+
+context:
+  component_name: sim
+  repo_name: ${{ "gz-" + component_name }}
+  version: 10.0.0
+  major_version: "10"
+  name: ${{ repo_name }}
+  component_version: ${{ component_name + major_version }}
+  cxx_name: ${{ "lib" + name }}
+  python_name: ${{ name + "-python" }}
+
+recipe:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/gazebosim/${{ repo_name }}/archive/refs/tags/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz
+    sha256: 3004ff52614a7ea635af3e4a5d42c362a06436d199000dbb558fd5b05b503878
+    patches:
+      - standalone_bindings.patch
+      - support_protobuf_crosscompilation.patch
+
+build:
+  number: 0
+
+outputs:
+  - package:
+      name: ${{ cxx_name }}
+    build:
+      script:
+        - if: unix
+          then: build_cxx.sh
+        - if: win
+          then: bld_cxx.bat
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - ${{ compiler('cxx') }}
+        - cmake
+        - pkg-config
+        - ninja
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - pybind11
+            - pybind11-abi
+            - libabseil
+            - libprotobuf
+            - libgz-msgs
+        - if: unix
+          then:
+            - make
+      host:
+        - libgz-cmake
+        - libsdformat
+        - libgz-plugin
+        - libgz-transport
+        - libgz-msgs
+        - libgz-common
+        - libgz-fuel-tools
+        - libgz-gui
+        - libgz-physics
+        - libgz-sensors
+        - libgz-rendering
+        - libgz-utils
+        - libgz-math
+        - libgz-tools
+        - libabseil
+        - libprotobuf
+        - qt6-main
+        - tinyxml2
+        - if: linux
+          then:
+            - libgl-devel
+            - xorg-libxfixes
+        - python
+        - pybind11
+        - pybind11-abi
+        - if: win
+          then:
+            - dlfcn-win32
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+    tests:
+      - package_contents:
+          include:
+            - gz/${{ component_version }}/gz/${{ component_name }}.hh
+          lib:
+            - gz-${{ component_name }}
+            - ${{ name }}-python-system-loader-system
+      - script:
+          - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+
+  - package:
+      name: ${{ python_name }}
+    build:
+      script:
+        - if: unix
+          then: build_py.sh
+        - if: win
+          then: bld_py.bat
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - ${{ compiler('cxx') }}
+        - swig
+        - ninja
+        - cmake
+        - pkg-config
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - pybind11
+            - pybind11-abi
+            - pytest
+      host:
+        - ${{ pin_subpackage(cxx_name, exact=True) }}
+        - libgz-common
+        - libgz-msgs
+        - python
+        - pybind11
+        - pybind11-abi
+        - pytest
+        - if: linux
+          then:
+            - xorg-libxfixes
+            - libgl-devel
+        - libabseil
+        - libprotobuf
+      run:
+        - ${{ pin_subpackage(cxx_name, exact=True) }}
+        - python
+    tests:
+      - python:
+          imports:
+            - gz.${{ component_name }}${{ major_version }}
+
+  - package:
+      name: ${{ name }}
+    requirements:
+      run:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x.x.x') }}
+        - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+    tests:
+      - python:
+          imports:
+            - gz.${{ component_name }}${{ major_version }}
+      - script:
+          - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+
+about:
+  homepage: https://github.com/gazebosim/gz-sim
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Open source robotics simulator. The latest version of Gazebo.
+
+extra:
+  feedstock-name: ${{ repo_name }}
+  recipe-maintainers:
+    - wolfv
+    - traversaro
+    - Tobias-Fischer
