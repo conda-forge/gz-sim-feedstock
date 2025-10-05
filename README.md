@@ -27,213 +27,45 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_python3.10.____cpython</td>
+              <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.10.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.11.____cpython</td>
+              <td>linux_aarch64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.12.____cpython</td>
+              <td>linux_ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.13.____cp313</td>
+              <td>osx_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_python3.9.____cpython</td>
+              <td>osx_arm64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_python3.10.____cpython</td>
+              <td>win_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.13.____cp313</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.13.____cp313" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17793&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/gz-sim-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -249,9 +81,9 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim9-green.svg)](https://anaconda.org/conda-forge/gz-sim9) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim9.svg)](https://anaconda.org/conda-forge/gz-sim9) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim9.svg)](https://anaconda.org/conda-forge/gz-sim9) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim9.svg)](https://anaconda.org/conda-forge/gz-sim9) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim9--python-green.svg)](https://anaconda.org/conda-forge/gz-sim9-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim9-python.svg)](https://anaconda.org/conda-forge/gz-sim9-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim9-python.svg)](https://anaconda.org/conda-forge/gz-sim9-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim9-python.svg)](https://anaconda.org/conda-forge/gz-sim9-python) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--sim9-green.svg)](https://anaconda.org/conda-forge/libgz-sim9) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-sim9.svg)](https://anaconda.org/conda-forge/libgz-sim9) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-sim9.svg)](https://anaconda.org/conda-forge/libgz-sim9) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-sim9.svg)](https://anaconda.org/conda-forge/libgz-sim9) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim-green.svg)](https://anaconda.org/conda-forge/gz-sim) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim.svg)](https://anaconda.org/conda-forge/gz-sim) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim.svg)](https://anaconda.org/conda-forge/gz-sim) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim.svg)](https://anaconda.org/conda-forge/gz-sim) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--sim--python-green.svg)](https://anaconda.org/conda-forge/gz-sim-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-sim-python.svg)](https://anaconda.org/conda-forge/gz-sim-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-sim-python.svg)](https://anaconda.org/conda-forge/gz-sim-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-sim-python.svg)](https://anaconda.org/conda-forge/gz-sim-python) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--sim-green.svg)](https://anaconda.org/conda-forge/libgz-sim) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-sim.svg)](https://anaconda.org/conda-forge/libgz-sim) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-sim.svg)](https://anaconda.org/conda-forge/libgz-sim) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-sim.svg)](https://anaconda.org/conda-forge/libgz-sim) |
 
 Installing gz-sim
 =================
@@ -263,41 +95,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gz-sim9, gz-sim9-python, libgz-sim9` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gz-sim, gz-sim-python, libgz-sim` can be installed with `conda`:
 
 ```
-conda install gz-sim9 gz-sim9-python libgz-sim9
-```
-
-or with `mamba`:
-
-```
-mamba install gz-sim9 gz-sim9-python libgz-sim9
-```
-
-It is possible to list all of the versions of `gz-sim9` available on your platform with `conda`:
-
-```
-conda search gz-sim9 --channel conda-forge
+conda install gz-sim gz-sim-python libgz-sim
 ```
 
 or with `mamba`:
 
 ```
-mamba search gz-sim9 --channel conda-forge
+mamba install gz-sim gz-sim-python libgz-sim
+```
+
+It is possible to list all of the versions of `gz-sim` available on your platform with `conda`:
+
+```
+conda search gz-sim --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search gz-sim --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search gz-sim9 --channel conda-forge
+mamba repoquery search gz-sim --channel conda-forge
 
-# List packages depending on `gz-sim9`:
-mamba repoquery whoneeds gz-sim9 --channel conda-forge
+# List packages depending on `gz-sim`:
+mamba repoquery whoneeds gz-sim --channel conda-forge
 
-# List dependencies of `gz-sim9`:
-mamba repoquery depends gz-sim9 --channel conda-forge
+# List dependencies of `gz-sim`:
+mamba repoquery depends gz-sim --channel conda-forge
 ```
 
 
@@ -322,12 +154,12 @@ it is possible to build and upload installable packages to the
 [conda-forge](https://anaconda.org/conda-forge) [anaconda.org](https://anaconda.org/)
 channel for Linux, Windows and OSX respectively.
 
-To manage the continuous integration and simplify feedstock maintenance
+To manage the continuous integration and simplify feedstock maintenance,
 [conda-smithy](https://github.com/conda-forge/conda-smithy) has been developed.
 Using the ``conda-forge.yml`` within this repository, it is possible to re-render all of
 this feedstock's supporting files (e.g. the CI configuration files) with ``conda smithy rerender``.
 
-For more information please check the [conda-forge documentation](https://conda-forge.org/docs/).
+For more information, please check the [conda-forge documentation](https://conda-forge.org/docs/).
 
 Terminology
 ===========
@@ -354,7 +186,7 @@ merged, the recipe will be re-built and uploaded automatically to the
 everybody to install and use from the `conda-forge` channel.
 Note that all branches in the conda-forge/gz-sim-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
-on branches in forks and branches in the main repository should only be used to
+on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.
 
 In order to produce a uniquely identifiable distribution:
