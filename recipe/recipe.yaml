@@ -2,13 +2,13 @@ schema_version: 1
 
 context:
   component_name: sim
-  repo_name: ${{ "gz-" + component_name }}
+  repo_name: ${{ "gz-" ~ component_name }}
   version: 10.0.0
   major_version: "10"
   name: ${{ repo_name }}
-  component_version: ${{ component_name + major_version }}
-  cxx_name: ${{ "lib" + name }}
-  python_name: ${{ name + "-python" }}
+  component_version: ${{ component_name ~ major_version }}
+  cxx_name: ${{ "lib" ~ name }}
+  python_name: ${{ name ~ "-python" }}
 
 recipe:
   name: ${{ name }}
