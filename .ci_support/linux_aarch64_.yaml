@@ -6,8 +6,6 @@ c_stdlib:
 - sysroot
 c_stdlib_version:
 - '2.17'
-cdt_name:
-- conda
 channel_sources:
 - conda-forge
 channel_targets:
@@ -29,13 +27,16 @@ pin_run_as_build:
 pybind11_abi:
 - '11'
 python:
-- 3.9.* *_cpython
+- 3.10.* *_cpython
+- 3.11.* *_cpython
+- 3.12.* *_cpython
+- 3.13.* *_cp313
 python_impl:
 - cpython
 qt_main:
 - '5.15'
 target_platform:
-- linux-ppc64le
+- linux-aarch64
 tinyxml2:
 - '11.0'
 zip_keys:
