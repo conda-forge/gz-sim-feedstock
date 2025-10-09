@@ -1,0 +1,71 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
+c_compiler:
+- clang
+c_compiler_version:
+- '19'
+c_stdlib:
+- macosx_deployment_target
+c_stdlib_version:
+- '11.0'
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- clangxx
+cxx_compiler_version:
+- '19'
+libabseil:
+- '20250512'
+libgz_cmake:
+- '5'
+libgz_common:
+- '7'
+libgz_fuel_tools:
+- '11'
+libgz_gui:
+- '10'
+libgz_math:
+- '9'
+libgz_msgs:
+- '12'
+libgz_physics:
+- '9'
+libgz_plugin:
+- '4'
+libgz_rendering:
+- '10'
+libgz_sensors:
+- '10'
+libgz_tools:
+- '2'
+libgz_transport:
+- '15'
+libgz_utils:
+- '4'
+libprotobuf:
+- 6.31.1
+libsdformat:
+- '16'
+macos_machine:
+- x86_64-apple-darwin13.4.0
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+pybind11_abi:
+- '11'
+python:
+- 3.10.* *_cpython
+qt6_main:
+- '6.9'
+target_platform:
+- osx-64
+tinyxml2:
+- '11.0'
+zip_keys:
+- - c_compiler_version
+  - cxx_compiler_version
