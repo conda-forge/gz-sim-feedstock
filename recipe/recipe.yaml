@@ -92,13 +92,14 @@ outputs:
           lib:
             - gz-${{ component_name }}
             - ${{ name }}-python-system-loader-system
-      - script:
-          - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}
-        requirements:
-          run:
-            - cmake-package-check
-            - ${{ compiler('c') }}
-            - ${{ compiler('cxx') }}
+      # commented out due to strange failures on linux-aarch64 https://github.com/conda-forge/gz-sim-feedstock/issues/109
+      #- script:
+      #    - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}
+      #  requirements:
+      #    run:
+      #      - cmake-package-check
+      #      - ${{ compiler('c') }}
+      #      - ${{ compiler('cxx') }}
 
   - package:
       name: ${{ python_name }}
@@ -162,7 +163,7 @@ outputs:
       - python:
           imports:
             - gz.${{ component_name }}
-      # commented out due to strange failures on linux-aarch64
+      # commented out due to strange failures on linux-aarch64 https://github.com/conda-forge/gz-sim-feedstock/issues/109
       #- script:
       #   - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}
       #  requirements:
