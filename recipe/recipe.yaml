@@ -50,6 +50,7 @@ outputs:
             - libabseil
             - libprotobuf
             - libgz-msgs
+            - qt6-main
         - if: unix
           then:
             - make
