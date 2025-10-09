@@ -10,7 +10,7 @@ index 98bbe66650..06295abf3b 100644
 +  project(gz-sim-python VERSION ${GZ_SIM_VER})
 +  find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 +  find_package(pybind11 REQUIRED)
-+  find_package(gz-simREQUIRED)
++  find_package(gz-sim REQUIRED)
 +  set(PROJECT_LIBRARY_TARGET_NAME "gz-sim::gz-sim")
 +  include(CTest)
 +  if(BUILD_TESTING)
