@@ -149,8 +149,12 @@ outputs:
   - package:
       name: ${{ name }}
     requirements:
+      host:
+        # This is not a real dependency, but we ensure that we build a different variant of gz-sim for each
+        # python version, and that make sense as there is different variant of gz-sim for each python version.
+        - python
       run:
-        - ${{ pin_subpackage(cxx_name, upper_bound='x.x.x') }}
+        - ${{ pin_subpackage(cxx_name, exact=True) }}
         - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
       run_exports:
         - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
