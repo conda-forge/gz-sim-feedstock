@@ -1,0 +1,60 @@
+From adfa97bc86bbc8d8a119c1ab613a9a3804768f96 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Fri, 10 Oct 2025 14:05:04 +0200
+Subject: [PATCH] Fix relocatibility of gz-sim-main executable
+
+Signed-off-by: Silvio Traversaro <silvio@traversaro.it>
+---
+ src/cmd/CMakeLists.txt |  2 +-
+ src/cmd/sim_main.cc    | 11 +++++++++--
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/src/cmd/CMakeLists.txt b/src/cmd/CMakeLists.txt
+index 82a3ed4db3..dd7e186e75 100644
+--- a/src/cmd/CMakeLists.txt
++++ b/src/cmd/CMakeLists.txt
+@@ -72,7 +72,7 @@ if(ENABLE_GUI)
+   target_compile_definitions(${sim_executable} PRIVATE WITH_GUI)
+   target_compile_definitions(${sim_executable}
+     PRIVATE
+-      "GZ_SIM_GUI_EXE=\"${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}/$<TARGET_FILE_NAME:${gui_executable}>\""
++      "GZ_SIM_GUI_EXE_RELATIVE_PATH=\"${CMAKE_INSTALL_LIBEXECDIR}/gz/${GZ_DESIGNATION}${PROJECT_VERSION_MAJOR}/$<TARGET_FILE_NAME:${gui_executable}>\""
+   )
+ endif()
+ 
+diff --git a/src/cmd/sim_main.cc b/src/cmd/sim_main.cc
+index be8f410ae7..64be48c453 100644
+--- a/src/cmd/sim_main.cc
++++ b/src/cmd/sim_main.cc
+@@ -31,6 +31,7 @@
+ #include <gz/utils/Subprocess.hh>
+ 
+ #include "gz/sim/config.hh"
++#include "gz/sim/InstallationDirectories.hh"
+ #include "gz/sim/Server.hh"
+ #include "gz/sim/ServerConfig.hh"
+ #include "gz.hh"
+@@ -493,7 +494,10 @@ int main(int argc, char** argv)
+           utils::setenv(
+               std::string("GZ_SIM_WAIT_GUI"),
+               std::to_string(opt->waitGui));
+-          launchProcess(std::string(GZ_SIM_GUI_EXE), createGuiCommand(opt));
++          std::string gz_sim_gui_exe = gz::common::joinPaths(
++              sim::getInstallPrefix(),
++              GZ_SIM_GUI_EXE_RELATIVE_PATH);
++          launchProcess(gz_sim_gui_exe, createGuiCommand(opt));
+         }
+         catch (const std::exception &e)
+         {
+@@ -576,7 +580,10 @@ int main(int argc, char** argv)
+     else if(opt->launchGui)
+     {
+       #ifdef WITH_GUI
+-      launchProcess(std::string(GZ_SIM_GUI_EXE), createGuiCommand(opt));
++      std::string gz_sim_gui_exe = gz::common::joinPaths(
++          sim::getInstallPrefix(),
++          GZ_SIM_GUI_EXE_RELATIVE_PATH);
++      launchProcess(gz_sim_gui_exe, createGuiCommand(opt));
+       #else
+       std::cerr << "This version of Gazebo does not support GUI" << std::endl;
+       #endif
