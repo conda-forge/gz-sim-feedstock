@@ -21,9 +21,10 @@ source:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
       - 3105.patch
+      - 3108.patch
 
 build:
-  number: 1
+  number: 2
 
 outputs:
   - package:
