@@ -61,7 +61,7 @@ pybind11_abi:
 python:
 - 3.12.* *_cpython
 qt6_main:
-- '6.9'
+- '6.10'
 target_platform:
 - osx-arm64
 tinyxml2:
