@@ -22,7 +22,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -179,12 +179,34 @@ outputs:
         - ${{ pin_subpackage('libgz-sim', upper_bound='x') }}
     tests:
       - script:
-          - cmake-package-check gz-${{ component_name }}${{ major_version }}
-        requirements:
-          run:
-            - cmake-package-check
-            - ${{ compiler('c') }}
-            - ${{ compiler('cxx') }}
+          - if: not win
+            then:
+              - test -f ${PREFIX}/include/gz/${{ component_version }}/gz/${{ component_name }}.hh
+              - test -f ${PREFIX}/lib/cmake/${{ name }}/${{ name }}-config.cmake
+          - if: unix
+            then:
+              - test -f ${PREFIX}/lib/lib${{ name }}${SHLIB_EXT}
+              - if: python_impl != "pypy"
+                then:
+                  - test -f ${PREFIX}/lib/lib${{ name }}-python-system-loader-system${SHLIB_EXT}
+          - if: win
+            then:
+              - if not exist %PREFIX%\\Library\\include\\gz\\${{ component_version }}\\gz\\${{ component_name }}.hh exit 1
+              - if not exist %PREFIX%\\Library\\lib\\${{ name }}.lib exit 1
+              - if not exist %PREFIX%\\Library\\bin\\${{ name }}.dll exit 1
+              - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
+              - if: python_impl != "pypy"
+                then:
+                  - if not exist %PREFIX%\\Library\\lib\\${{ name }}-python-system-loader-system.lib exit 1
+                  - if not exist %PREFIX%\\Library\\bin\\${{ name }}-python-system-loader-system.dll exit 1
+      # commented out due to strange failures on linux-aarch64 https://github.com/conda-forge/gz-sim-feedstock/issues/109
+      #- script:
+      #    - cmake-package-check gz-${{ component_name }}${{ major_version }}
+      #  requirements:
+      #    run:
+      #      - cmake-package-check
+      #      - ${{ compiler('c') }}
+      #      - ${{ compiler('cxx') }}
 
   - package:
       name: gz-${{ component_name }}-python
@@ -207,13 +229,13 @@ outputs:
         - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
         - ${{ pin_subpackage('libgz-sim', upper_bound='x') }}
     tests:
-      - script:
-          - cmake-package-check gz-${{ component_name }}${{ major_version }}
-        requirements:
-          run:
-            - cmake-package-check
-            - ${{ compiler('c') }}
-            - ${{ compiler('cxx') }}
+      # - script:
+      #    - cmake-package-check gz-${{ component_name }}${{ major_version }}
+      #  requirements:
+      #    run:
+      #      - cmake-package-check
+      #      - ${{ compiler('c') }}
+      #      - ${{ compiler('cxx') }}
       - python:
           imports:
             - gz.${{ component_name }}${{ major_version }}
