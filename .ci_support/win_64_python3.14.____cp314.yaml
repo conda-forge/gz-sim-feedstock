@@ -1,0 +1,56 @@
+c_compiler:
+- vs2022
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2022
+libabseil:
+- '20250512'
+libgz_cmake:
+- '5'
+libgz_common:
+- '7'
+libgz_fuel_tools:
+- '11'
+libgz_gui:
+- '10'
+libgz_math:
+- '9'
+libgz_msgs:
+- '12'
+libgz_physics:
+- '9'
+libgz_plugin:
+- '4'
+libgz_rendering:
+- '10'
+libgz_sensors:
+- '10'
+libgz_tools:
+- '2'
+libgz_transport:
+- '15'
+libgz_utils:
+- '4'
+libprotobuf:
+- 6.31.1
+libsdformat:
+- '16'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+pybind11_abi:
+- '11'
+python:
+- 3.14.* *_cp314
+qt6_main:
+- '6.9'
+target_platform:
+- win-64
+tinyxml2:
+- '11.0'
