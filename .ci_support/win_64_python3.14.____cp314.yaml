@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - vs2022
 libabseil:
-- '20250512'
+- '20260107'
 libgz_cmake:
 - '5'
 libgz_common:
@@ -37,7 +37,7 @@ libgz_transport:
 libgz_utils:
 - '4'
 libprotobuf:
-- 6.31.1
+- 6.33.5
 libsdformat:
 - '16'
 pin_run_as_build:
