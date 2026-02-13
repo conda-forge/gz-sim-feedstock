@@ -9,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2022
 libabseil:
-- '20250512'
+- '20260107'
 libprotobuf:
-- 6.31.1
+- 6.33.5
 pin_run_as_build:
   python:
     min_pin: x.x
