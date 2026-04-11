@@ -1,38 +1,60 @@
 diff --git a/src/SimulationRunner.cc b/src/SimulationRunner.cc
-index ad68b9d62..d4beebb62 100644
+index ad68b9d62..b6dd8afe1 100644
 --- a/src/SimulationRunner.cc
 +++ b/src/SimulationRunner.cc
-@@ -181,6 +181,15 @@ SimulationRunner::SimulationRunner(const sdf::World &_world,
-   );
-   this->currentInfo.simTime = this->simTimeEpoch;
+@@ -66,6 +66,16 @@
+ #include "LevelManager.hh"
+ #include "SdfGenerator.hh"
  
 +#ifdef _WIN32
-+  winPrecisionTimer = CreateWaitableTimerExA(NULL, NULL, CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, TIMER_ALL_ACCESS);
-+  if (winPrecisionTimer == NULL)
-+  {
-+    gzerr << "Could not initialize Windows precision timer" << std::endl;
-+    return;
-+  }
++#ifndef NOMINMAX
++#define NOMINMAX
++#endif
++#ifndef WIN32_LEAN_AND_MEAN
++#define WIN32_LEAN_AND_MEAN
++#endif
++#include <windows.h>
 +#endif
 +
-   // World control
-   transport::NodeOptions opts;
-   std::string ns{"/world/" + this->worldName};
-@@ -322,6 +331,13 @@ SimulationRunner::SimulationRunner(const sdf::World &_world,
- SimulationRunner::~SimulationRunner()
- {
-   this->StopWorkerThreads();
-+#ifdef _WIN32
-+  if (winPrecisionTimer != NULL)
-+  {
-+    CloseHandle(winPrecisionTimer);
-+    winPrecisionTimer = NULL;
-+  }
-+#endif
+ using namespace gz;
+ using namespace sim;
+ 
+@@ -102,6 +112,34 @@ struct MaybeGilScopedRelease
+ #endif
  }
  
- /////////////////////////////////////////////////
-@@ -905,14 +921,31 @@ bool SimulationRunner::Run(const uint64_t _iterations)
++#ifdef _WIN32
++namespace gz
++{
++namespace sim
++{
++inline namespace GZ_SIM_VERSION_NAMESPACE {
++class SimulationRunnerWinHandleStorage
++{
++  private: HANDLE handle_storage{NULL};
++
++  public: HANDLE handle() { return handle_storage; }
++
++  public: SimulationRunnerWinHandleStorage(HANDLE h) : handle_storage(h) {}
++
++  public: ~SimulationRunnerWinHandleStorage() {
++    if (handle_storage != NULL)
++    {
++      CloseHandle(handle_storage);
++    }
++  }
++};
++
++static thread_local std::unique_ptr<SimulationRunnerWinHandleStorage> winPrecisionTimer;
++
++}
++}
++}
++#endif
+ 
+ //////////////////////////////////////////////////
+ SimulationRunner::SimulationRunner(const sdf::World &_world,
+@@ -905,14 +943,43 @@ bool SimulationRunner::Run(const uint64_t _iterations)
        // larger than the typical OS + CPU C-state latency.
        constexpr auto kSpinThreshold = 200us;
  
@@ -50,23 +72,35 @@ index ad68b9d62..d4beebb62 100644
 +#ifndef _WIN32
            std::this_thread::sleep_until(sleepTarget);
 +#else
-+          auto sleepTargetDuration = std::chrono::duration_cast<std::chrono::microseconds>(sleepTarget - now);
-+          LARGE_INTEGER due_time;
-+          memset(&due_time, 0, sizeof(due_time));
-+          due_time.QuadPart = -sleepTargetDuration.count() * 10;
-+          if (SetWaitableTimer(winPrecisionTimer, &due_time, 0, NULL, NULL, FALSE) != TRUE)
++          if (!winPrecisionTimer)
 +          {
-+            gzerr << "Could not SetWaitableTimer" << std::endl;
++            HANDLE winPrecisionTimer_handle = CreateWaitableTimerExA(NULL, NULL, CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, TIMER_ALL_ACCESS);
++            winPrecisionTimer = std::make_unique<SimulationRunnerWinHandleStorage>(winPrecisionTimer_handle);
++          }
++          if (winPrecisionTimer->handle())
++          {
++            auto sleepTargetDuration = std::chrono::duration_cast<std::chrono::microseconds>(sleepTarget - now);
++            LARGE_INTEGER due_time;
++            memset(&due_time, 0, sizeof(due_time));
++            due_time.QuadPart = -sleepTargetDuration.count() * 10;
++            if (SetWaitableTimer(winPrecisionTimer->handle(), &due_time, 0, NULL, NULL, FALSE) != TRUE)
++            {
++              gzerr << "Could not SetWaitableTimer" << std::endl;
++            }
++            else
++            {
++              WaitForSingleObject(winPrecisionTimer->handle(), INFINITE);
++            }
 +          }
 +          else
 +          {
-+            WaitForSingleObject(winPrecisionTimer, INFINITE);
++            std::this_thread::sleep_until(sleepTarget);
 +          }
 +#endif
          }
  
          // ...then busy-wait for the final moments for precision.
-@@ -923,7 +956,7 @@ bool SimulationRunner::Run(const uint64_t _iterations)
+@@ -923,7 +990,7 @@ bool SimulationRunner::Run(const uint64_t _iterations)
        }
  
        // Schedule the next update time.
@@ -75,18 +109,3 @@ index ad68b9d62..d4beebb62 100644
        nextUpdateTime += this->updatePeriod;
        if (nextUpdateTime < now)
        {
-diff --git a/src/SimulationRunner.hh b/src/SimulationRunner.hh
-index dd64ebc65..bf02b6af8 100644
---- a/src/SimulationRunner.hh
-+++ b/src/SimulationRunner.hh
-@@ -579,6 +579,10 @@ namespace gz
-       private: bool createEntities{false};
-       private: bool entitiesCreated{false};
- 
-+#ifdef _WIN32
-+      private: HANDLE winPrecisionTimer;
-+#endif
-+
-       friend class LevelManager;
-     };
-     }
