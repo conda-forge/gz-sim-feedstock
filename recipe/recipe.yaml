@@ -23,7 +23,7 @@ source:
       - win_high_res_timer.patch
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - package:
