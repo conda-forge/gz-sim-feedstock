@@ -3,7 +3,7 @@ schema_version: 1
 context:
   component_name: sim
   repo_name: ${{ "gz-" ~ component_name }}
-  version: "10.2.0"
+  version: "10.3.0"
   major_version: "10"
   name: ${{ repo_name }}
   component_version: ${{ component_name ~ major_version }}
@@ -16,7 +16,7 @@ recipe:
 
 source:
   - url: https://github.com/gazebosim/${{ repo_name }}/archive/refs/tags/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz
-    sha256: a80b19e2a50dc9fd78980ad08fbb8d4359dd9ff721a2068aa2798ba798967c0f
+    sha256: 54d486b17972883fa3fbb27a843eaf7d20f1a111fe07664362bcfa6ff3ac283e
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
