@@ -34,6 +34,12 @@ cmake ${CMAKE_ARGS} -GNinja .. \
 cmake --build . --config Release
 cmake --build . --config Release --target install
 
+# system plugins of other packages in the environment (see activate.sh)
+for CHANGE in activate deactivate; do
+  mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
+  cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
+done
+
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
   ctest --output-on-failure -C Release 
 fi

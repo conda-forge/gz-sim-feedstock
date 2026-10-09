@@ -22,7 +22,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -92,6 +92,12 @@ outputs:
           lib:
             - gz-${{ component_name }}
             - ${{ name }}-python-system-loader-system
+      # the environment's plugin directory is on the system plugin path (activate.sh/.bat)
+      - script:
+          - if: unix
+            then: case ":${GZ_SIM_SYSTEM_PLUGIN_PATH}:" in *":${CONDA_PREFIX}/lib:"*) ;; *) exit 1;; esac
+          - if: win
+            then: echo %GZ_SIM_SYSTEM_PLUGIN_PATH% | findstr /I /C:"%CONDA_PREFIX%\Library\bin"
       # commented out due to strange failures on linux-aarch64 https://github.com/conda-forge/gz-sim-feedstock/issues/109
       #- script:
       #    - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}

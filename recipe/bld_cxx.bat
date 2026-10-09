@@ -38,3 +38,10 @@ if errorlevel 1 exit 1
 :: Note that also qt6.conf contains an absolute path to the prefix, but as it is a textual file
 :: the replacement is handled correctly by conda also on Windows
 copy %PREFIX%\Library\bin\qt6.conf %PREFIX%\Library\libexec\gz\sim10\
+
+:: system plugins of other packages in the environment (see activate.bat)
+for %%F in (activate deactivate) do (
+  if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
+  copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
+  if errorlevel 1 exit 1
+)
