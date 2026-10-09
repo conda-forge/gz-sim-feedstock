@@ -36,3 +36,10 @@ if errorlevel 1 exit 1
 :: Test.
 ctest --output-on-failure -C Release
 if errorlevel 1 exit 1
+
+:: system plugins of other packages in the environment (see activate.bat)
+for %%F in (activate deactivate) do (
+  if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
+  copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
+  if errorlevel 1 exit 1
+)
