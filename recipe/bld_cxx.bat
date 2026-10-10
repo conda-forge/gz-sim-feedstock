@@ -39,9 +39,11 @@ if errorlevel 1 exit 1
 :: the replacement is handled correctly by conda also on Windows
 copy %PREFIX%\Library\bin\qt6.conf %PREFIX%\Library\libexec\gz\sim10\
 
-:: system plugins of other packages in the environment (see activate.bat)
-for %%F in (activate deactivate) do (
-  if not exist %PREFIX%\etc\conda\%%F.d mkdir %PREFIX%\etc\conda\%%F.d
-  copy %RECIPE_DIR%\%%F.bat %PREFIX%\etc\conda\%%F.d\%PKG_NAME%_%%F.bat
-  if errorlevel 1 exit 1
-)
+:: gz-sim looks for system plugins in GZ_SIM_SYSTEM_PLUGIN_PATH, ~/.gz/sim/plugins and
+:: its own plugin directory; other packages install theirs into Library\bin: set it on
+:: activation (etc/conda/env_vars.d, CEP 34; forward slashes keep the JSON valid, and the
+:: prefix is replaced at installation)
+if not exist %PREFIX%\etc\conda\env_vars.d mkdir %PREFIX%\etc\conda\env_vars.d
+set "FWD_PREFIX=%PREFIX:\=/%"
+echo {"GZ_SIM_SYSTEM_PLUGIN_PATH": "%FWD_PREFIX%/Library/bin"} > %PREFIX%\etc\conda\env_vars.d\%PKG_NAME%.json
+if errorlevel 1 exit 1
