@@ -22,7 +22,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -92,6 +92,12 @@ outputs:
           lib:
             - gz-${{ component_name }}
             - ${{ name }}-python-system-loader-system
+      # etc/conda/env_vars.d/<pkg>.json is activated, with the installation prefix
+      - script:
+          - if: unix
+            then: test "${GZ_SIM_SYSTEM_PLUGIN_PATH}" = "${CONDA_PREFIX}/lib"
+          - if: win
+            then: 'if not "%GZ_SIM_SYSTEM_PLUGIN_PATH:\=/%"=="%CONDA_PREFIX:\=/%/Library/bin" exit 1'
       # commented out due to strange failures on linux-aarch64 https://github.com/conda-forge/gz-sim-feedstock/issues/109
       #- script:
       #    - cmake-package-check gz-${{ component_name }} --targets gz-${{ component_name }}::gz-${{ component_name }}
