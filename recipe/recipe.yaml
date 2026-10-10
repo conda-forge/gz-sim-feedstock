@@ -82,12 +82,12 @@ outputs:
       run_exports:
         - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
     tests:
-      # the environment's plugin directory is on the system plugin path (activate.sh/.bat)
+      # etc/conda/env_vars.d/<pkg>.json is activated, with the installation prefix
       - script:
           - if: unix
-            then: case ":${GZ_SIM_SYSTEM_PLUGIN_PATH}:" in *":${CONDA_PREFIX}/lib:"*) ;; *) exit 1;; esac
+            then: test "${GZ_SIM_SYSTEM_PLUGIN_PATH}" = "${CONDA_PREFIX}/lib"
           - if: win
-            then: echo %GZ_SIM_SYSTEM_PLUGIN_PATH% | findstr /I /C:"%CONDA_PREFIX%\Library\bin"
+            then: 'if not "%GZ_SIM_SYSTEM_PLUGIN_PATH:\=/%"=="%CONDA_PREFIX:\=/%/Library/bin" exit 1'
       - script:
           - if: not win
             then:
