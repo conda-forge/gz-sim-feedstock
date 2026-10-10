@@ -36,3 +36,12 @@ if errorlevel 1 exit 1
 :: Test.
 ctest --output-on-failure -C Release
 if errorlevel 1 exit 1
+
+:: gz-sim looks for system plugins in GZ_SIM_SYSTEM_PLUGIN_PATH, ~/.gz/sim/plugins and
+:: its own plugin directory; other packages install theirs into Library\bin: set it on
+:: activation (etc/conda/env_vars.d, CEP 34; forward slashes keep the JSON valid, and the
+:: prefix is replaced at installation)
+if not exist %PREFIX%\etc\conda\env_vars.d mkdir %PREFIX%\etc\conda\env_vars.d
+set "FWD_PREFIX=%PREFIX:\=/%"
+echo {"GZ_SIM_SYSTEM_PLUGIN_PATH": "%FWD_PREFIX%/Library/bin"} > %PREFIX%\etc\conda\env_vars.d\%PKG_NAME%.json
+if errorlevel 1 exit 1

@@ -35,6 +35,15 @@ cmake ${CMAKE_ARGS} -GNinja .. \
 cmake --build . --config Release
 cmake --build . --config Release --target install
 
+# gz-sim looks for system plugins in GZ_SIM_SYSTEM_PLUGIN_PATH, ~/.gz/sim/plugins and
+# its own plugin directory. Other packages (e.g. ROS' gz_ros2_control) install theirs
+# into the environment's lib/, which a ROS setup script would add: set it on activation
+# (etc/conda/env_vars.d, CEP 34; the prefix is replaced at installation)
+mkdir -p "${PREFIX}/etc/conda/env_vars.d"
+cat > "${PREFIX}/etc/conda/env_vars.d/${PKG_NAME}.json" << EOF_JSON
+{"GZ_SIM_SYSTEM_PLUGIN_PATH": "${PREFIX}/lib"}
+EOF_JSON
+
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
   ctest --output-on-failure -C Release 
 fi
