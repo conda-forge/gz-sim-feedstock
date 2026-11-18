@@ -39,7 +39,7 @@ outputs:
         - ${{ stdlib('c') }}
         - ${{ compiler('cxx') }}
         - cmake
-        - pkg-config
+        - pkgconf
         - ninja
         - if: build_platform != target_platform
           then:
