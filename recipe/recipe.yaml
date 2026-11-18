@@ -125,7 +125,7 @@ outputs:
         - swig
         - ninja
         - cmake
-        - pkg-config
+        - pkgconf
         - if: build_platform != target_platform
           then:
             - python
