@@ -22,7 +22,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 4
+  number: 5
 
 outputs:
   - package:
@@ -39,7 +39,7 @@ outputs:
         - ${{ stdlib('c') }}
         - ${{ compiler('cxx') }}
         - cmake
-        - pkg-config
+        - pkgconf
         - ninja
         - if: build_platform != target_platform
           then:
@@ -126,7 +126,7 @@ outputs:
         - swig
         - ninja
         - cmake
-        - pkg-config
+        - pkgconf
         - if: build_platform != target_platform
           then:
             - python
