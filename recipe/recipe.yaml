@@ -22,7 +22,7 @@ source:
       - support_protobuf_crosscompilation.patch
 
 build:
-  number: 4
+  number: 6
 
 outputs:
   - package:
@@ -39,7 +39,7 @@ outputs:
         - ${{ stdlib('c') }}
         - ${{ compiler('cxx') }}
         - cmake
-        - pkg-config
+        - pkgconf
         - ninja
         - if: build_platform != target_platform
           then:
@@ -82,6 +82,12 @@ outputs:
       run_exports:
         - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
     tests:
+      # etc/conda/env_vars.d/<pkg>.json is activated, with the installation prefix
+      - script:
+          - if: unix
+            then: test "${GZ_SIM_SYSTEM_PLUGIN_PATH}" = "${CONDA_PREFIX}/lib"
+          - if: win
+            then: 'if not "%GZ_SIM_SYSTEM_PLUGIN_PATH:\=/%"=="%CONDA_PREFIX:\=/%/Library/bin" exit 1'
       - script:
           - if: not win
             then:
@@ -120,7 +126,7 @@ outputs:
         - swig
         - ninja
         - cmake
-        - pkg-config
+        - pkgconf
         - if: build_platform != target_platform
           then:
             - python
