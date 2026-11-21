@@ -20,9 +20,11 @@ source:
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
-      # Allow to run server and GUI with a single `gz sim` on macOS
-      # https://github.com/gazebosim/gz-sim/pull/4084
-      - 4084.patch
+      # Allow to run server and GUI with a single `gz sim` on macOS, by spawning
+      # them as separate processes instead of forking. Same idea as
+      # https://github.com/gazebosim/gz-sim/pull/4084, reworked to address
+      # https://github.com/gazebosim/gz-sim/pull/4084#issuecomment-7058934669
+      - macos_single_gz_sim_command.patch
 
 build:
   number: 5
