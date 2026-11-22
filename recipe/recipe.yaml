@@ -20,9 +20,14 @@ source:
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
+      # Allow to run server and GUI with a single `gz sim` on macOS, by spawning
+      # them as separate processes instead of forking. Same idea as
+      # https://github.com/gazebosim/gz-sim/pull/4084, reworked to address
+      # https://github.com/gazebosim/gz-sim/pull/4084#issuecomment-7058934669
+      - macos_single_gz_sim_command.patch
 
 build:
-  number: 5
+  number: 6
 
 outputs:
   - package:
@@ -193,6 +198,13 @@ outputs:
               - if not exist %PREFIX%\\Library\\lib\\${{ name }}.lib exit 1
               - if not exist %PREFIX%\\Library\\bin\\${{ name }}.dll exit 1
               - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
+      - script:
+          - cmake-package-check gz-${{ component_name }}${{ major_version }} --targets gz-${{ component_name }}${{ major_version }}::gz-${{ component_name }}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
 
   - package:
       name: gz-${{ component_name }}-python
