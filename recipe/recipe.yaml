@@ -20,6 +20,11 @@ source:
     patches:
       - standalone_bindings.patch
       - support_protobuf_crosscompilation.patch
+      # Allow to run server and GUI with a single `gz sim` on macOS, by spawning
+      # them as separate processes instead of forking. Same idea as
+      # https://github.com/gazebosim/gz-sim/pull/4084, reworked to address
+      # https://github.com/gazebosim/gz-sim/pull/4084#issuecomment-7058934669
+      - macos_single_gz_sim_command.patch
 
 build:
   number: 5
@@ -199,14 +204,13 @@ outputs:
                 then:
                   - if not exist %PREFIX%\\Library\\lib\\${{ name }}-python-system-loader-system.lib exit 1
                   - if not exist %PREFIX%\\Library\\bin\\${{ name }}-python-system-loader-system.dll exit 1
-      # commented out due to strange failures on linux-aarch64 https://github.com/conda-forge/gz-sim-feedstock/issues/109
-      #- script:
-      #    - cmake-package-check gz-${{ component_name }}${{ major_version }}
-      #  requirements:
-      #    run:
-      #      - cmake-package-check
-      #      - ${{ compiler('c') }}
-      #      - ${{ compiler('cxx') }}
+      - script:
+          - cmake-package-check gz-${{ component_name }}${{ major_version }} --targets gz-${{ component_name }}${{ major_version }}::gz-${{ component_name }}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
 
   - package:
       name: gz-${{ component_name }}-python
@@ -229,13 +233,13 @@ outputs:
         - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
         - ${{ pin_subpackage('libgz-sim', upper_bound='x') }}
     tests:
-      # - script:
-      #    - cmake-package-check gz-${{ component_name }}${{ major_version }}
-      #  requirements:
-      #    run:
-      #      - cmake-package-check
-      #      - ${{ compiler('c') }}
-      #      - ${{ compiler('cxx') }}
+      - script:
+          - cmake-package-check gz-${{ component_name }}${{ major_version }} --targets gz-${{ component_name }}${{ major_version }}::gz-${{ component_name }}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
       - python:
           imports:
             - gz.${{ component_name }}${{ major_version }}
