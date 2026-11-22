@@ -1,0 +1,151 @@
+--- a/src/cmd/cmdsim.rb.in
++++ b/src/cmd/cmdsim.rb.in
+@@ -221,7 +221,99 @@
+     if killedPid != pid
+       puts "Escalating to SIGKILL on [#{name}]"
+       Process.kill("-KILL", pid)
++    end
++  end
++
++  #
++  # Spawn the server and the GUI as two new `gz sim` processes, and return
++  # their pids. This is used on macOS, where forking after the simulation
++  # library (and with it Qt and CoreFoundation) was loaded is not safe.
++  #
++  def spawnServerAndGui(options)
++    # The arguments of the children are built from the already parsed
++    # options, so that every accepted spelling of an option is handled, and
++    # derived values (such as the playback GUI config) are preserved.
++    # The --option=value form is used as all the values are optional.
++    addValue = lambda do |args, name, value|
++      args << "#{name}=#{value}" unless value.to_s.empty?
++    end
++
++    commonArgs = ["--verbose=#{options['verbose']}"]
++    addValue.call(commonArgs, '--render-engine-gui',
++                  options['render_engine_gui'])
++    addValue.call(commonArgs, '--render-engine-gui-api-backend',
++                  options['render_engine_gui_api_backend'])
++
++    serverArgs = ['-s'] + commonArgs
++    serverArgs << "--iterations=#{options['iterations']}" if
++      options['iterations'].to_i != 0
++    serverArgs << "-z#{options['hz']}" if options['hz'].to_f > 0
++    serverArgs << "--initial-sim-time=#{options['initial_sim_time']}" if
++      options['initial_sim_time'].to_f != 0
++    serverArgs << '-r' if options['run'] == 1
++    serverArgs << '--levels' if options['levels'] == 1
++    addValue.call(serverArgs, '--network-role', options['network_role'])
++    serverArgs << "--network-secondaries=#{options['network_secondaries']}" if
++      options['network_secondaries'].to_i != 0
++    serverArgs << '--record' if options['record'] == 1
++    addValue.call(serverArgs, '--record-path', options['record-path'])
++    serverArgs << '--record-resources' if options['record-resources'] == 1
++    options['record-topics'].each do |topic|
++      addValue.call(serverArgs, '--record-topic', topic)
++    end
++    serverArgs << "--record-period=#{options['record-period']}" if
++      options['record-period'].to_f >= 0
++    serverArgs << '--log-overwrite' if options['log-overwrite'] == 1
++    serverArgs << '--log-compress' if options['log-compress'] == 1
++    addValue.call(serverArgs, '--playback', options['playback'])
++    addValue.call(serverArgs, '--physics-engine', options['physics_engine'])
++    serverArgs << '--headless-rendering' if options['headless-rendering'] == 1
++    addValue.call(serverArgs, '--render-engine-server',
++                  options['render_engine_server'])
++    addValue.call(serverArgs, '--render-engine-server-api-backend',
++                  options['render_engine_server_api_backend'])
++    serverArgs << "--seed=#{options['seed']}" if options['seed'].to_i != 0
++
++    guiArgs = ['-g'] + commonArgs
++    addValue.call(guiArgs, '--gui-config', options['gui_config'])
++
++    # The SDF file is the last positional argument. The "--" protects file
++    # names that start with a dash.
++    if options['file'] != ''
++      serverArgs.push('--', options['file'])
++      guiArgs.push('--', options['file'])
++    end
++
++    # Reuse the running gz executable and force the version of this library,
++    # so that the children use the same Gazebo Sim as this process even if
++    # several versions are installed. gz consumes --force-version before
++    # the command is executed, so it is not part of the parsed options.
++    # options['command'] is not set if no SDF file was given.
++    command = [File.realpath($PROGRAM_NAME), options['command'] || 'sim',
++               '--force-version', LIBRARY_VERSION]
++
++    # -s and -g disable the world selection dialog and the wait for the
++    # world selected in it. GZ_SIM_WAIT_GUI restores the value that the
++    # combined mode uses.
++    waitGui = options['wait_gui'].to_s
++
++    serverPid = nil
++    guiPid = nil
++    begin
++      serverPid = Process.spawn(
++        {'RMT_PORT' => '1500', 'GZ_SIM_WAIT_GUI' => waitGui},
++        *command, *serverArgs, pgroup: true)
++      guiPid = Process.spawn(
++        {'RMT_PORT' => '1501', 'GZ_SIM_WAIT_GUI' => waitGui},
++        *command, *guiArgs, pgroup: true)
++    ensure
++      # Do not leave the server behind if the GUI could not be started.
++      if guiPid.nil? && !serverPid.nil?
++        self.killProcess(serverPid, "Gazebo Sim Server", 5.0)
++      end
+     end
++
++    return serverPid, guiPid
+   end
+ 
+   #
+@@ -376,6 +468,10 @@
+ 
+     options['command'] = args[0]
+ 
++    # Set by spawnServerAndGui for the processes that it starts.
++    waitGui = ENV.delete('GZ_SIM_WAIT_GUI')
++    options['wait_gui'] = waitGui.to_i unless waitGui.nil?
++
+     options
+   end # parse()
+ 
+@@ -510,20 +606,20 @@
+       # and gui.
+       if options['server'] == 0 && options['gui'] == 0
+ 
+-        if plugin.end_with? ".dylib"
+-          puts "On macOS `gz sim` currently only works with either the -s argument
+-or the -g argument, you cannot run both server and gui in one terminal.
+-See https://github.com/gazebosim/gz-sim/issues/44 for more info."
+-          exit(-1)
+-        end
+-
+         if plugin.end_with? ".dll"
+           puts "`ign gazebo` currently only works with the -s argument on Windows.
+ See https://github.com/gazebosim/gz-sim/issues/168 for more info."
+           exit(-1)
+         end
+ 
+-        serverPid = Process.fork do
++        serverPid = nil
++        guiPid = nil
++        if plugin.end_with? ".dylib"
++          # Forking is not safe on macOS, see spawnServerAndGui.
++          serverPid, guiPid = self.spawnServerAndGui(options)
++        end
++
++        serverPid ||= Process.fork do
+           ENV['RMT_PORT'] = '1500'
+           Process.setpgid(0, 0)
+           Process.setproctitle('gz sim server')
+@@ -545,7 +641,7 @@
+             options['seed'])
+         end
+ 
+-        guiPid = Process.fork do
++        guiPid ||= Process.fork do
+           ENV['RMT_PORT'] = '1501'
+           Process.setpgid(0, 0)
+           Process.setproctitle('gz sim gui')
