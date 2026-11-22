@@ -80,9 +80,18 @@ outputs:
         - python
         - pybind11
         - pybind11-abi
+        # Not a dependency of python any more since Python 3.15, but needed
+        # to embed Python in the python-system-loader-system plugin
+        - if: unix
+          then:
+            - libpython
         - if: win
           then:
             - dlfcn-win32
+      run:
+        - if: unix
+          then:
+            - libpython
       run_exports:
         - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
     tests:
