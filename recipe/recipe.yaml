@@ -27,7 +27,7 @@ source:
       - macos_single_gz_sim_command.patch
 
 build:
-  number: 6
+  number: 7
 
 outputs:
   - package:
