@@ -19,7 +19,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64:alma10
 libabseil:
-- '20260526'
+- '20260817'
 libgz_cmake:
 - '5'
 libgz_common:
